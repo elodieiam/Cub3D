@@ -1,0 +1,6 @@
+*.o
+*.d
+cub3D
+.vscode
+libft.a
+objs_deps
