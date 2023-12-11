@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror -MMD -g3
 
 HEADERS = cub3d.h
 
-SOURCES = main.c
+SOURCES = main.c \
+		parsing/parsing.c
 
 SRC = srcs/
 DIR = objs_deps/
@@ -25,7 +26,8 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@make -sC libft
-	@$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) ./libft/libft.a -lreadline
+	@make -sC minilibx-linux
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -lXext -lX11
 	@echo "Compilation completed"
 
 $(DIR)%.o : $(SRC)%.c | $(DIR)
@@ -35,15 +37,12 @@ $(DIR) :
 	@echo "Start Compilation for $(NAME)"
 	@echo "Wait ..."
 	@mkdir -p objs_deps
-	@mkdir -p objs_deps/builtin
-	@mkdir -p objs_deps/env
-	@mkdir -p objs_deps/exec
-	@mkdir -p objs_deps/expend
 	@mkdir -p objs_deps/parsing
 
 clean :
 	@echo "Deleting Objects and Dependencies"
 	@make fclean -sC libft
+	@make clean -sC minilibx-linux
 	@rm -rf $(DIR)
 
 fclean : clean

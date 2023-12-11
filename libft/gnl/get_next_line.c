@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:52:58 by niromano          #+#    #+#             */
-/*   Updated: 2023/06/28 10:15:05 by niromano         ###   ########.fr       */
+/*   Updated: 2023/12/11 07:14:19 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,8 @@ char	*create_line(char *temp, int len_of_read)
 	return (n_line);
 }
 
-char	*final_return(char *line, char *temp, char *lim)
+char	*final_return(char *line, char *temp)
 {
-	if (lim != NULL)
-	{
-		if (ft_strncmp(line, lim, ft_strlen(lim)) == 0)
-		{
-			free(temp);
-			free(line);
-			return (lim);
-		}
-	}
 	if (line[0] == '\0')
 	{
 		free(temp);
@@ -76,7 +67,7 @@ char	*final_return(char *line, char *temp, char *lim)
 	return (line);
 }
 
-char	*get_next_line(int fd, char *lim)
+char	*get_next_line(int fd)
 {
 	char			*line;
 	char			*buf;
@@ -102,5 +93,5 @@ char	*get_next_line(int fd, char *lim)
 		line = create_line(temp[fd], len_of_read);
 		temp[fd] = new_temp(temp[fd], len_of_read);
 	}
-	return (final_return(line, temp[fd], lim));
+	return (final_return(line, temp[fd]));
 }
