@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/11 08:38:00 by niromano         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:06:41 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,22 @@
 
 typedef struct s_data
 {
-	char	*text_n;
-	char	*text_s;
-	char	*text_w;
-	char	*text_e;
-	char	**text_f;
-	char	**text_c;
+	int		fd;
+	char	*texture_n;
+	char	*texture_s;
+	char	*texture_w;
+	char	*texture_e;
+	int		texture_f;
+	int		texture_c;
 	char	**map;
+	t_list	*buffer;
 }	t_data;
+
+void	parsing(int argc, char **argv, t_data *data);
+void	set_data_null(t_data *data);
+
+void	clear_mat(char **mat);
+void	clear_all(t_data *data);
+void	clear_all_error(t_data *data, char *error);
 
 #endif

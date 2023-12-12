@@ -4,7 +4,9 @@ CFLAGS = -Wall -Wextra -Werror -MMD -g3
 HEADERS = cub3d.h
 
 SOURCES = main.c \
-		parsing/parsing.c
+		parsing/parsing.c \
+		parsing/data.c \
+		parsing/clear.c
 
 SRC = srcs/
 DIR = objs_deps/

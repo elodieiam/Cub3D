@@ -4,3 +4,7 @@ cub3D
 .vscode
 libft.a
 objs_deps
+minilibx-linux/libmlx.a
+minilibx-linux/libmlx_Linux.a
+minilibx-linux/test/mlx-test
+minilibx-linux/obj

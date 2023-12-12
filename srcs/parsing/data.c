@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/12 12:03:41 by niromano         ###   ########.fr       */
+/*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
+/*   Updated: 2023/12/12 09:19:58 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	main(int argc, char **argv)
+void	set_data_null(t_data *data)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
-		clear_all_error(data, "Malloc Failed !\n");
-	parsing(argc, argv, data);
-	clear_all(data);
-	return (0);
+	data->fd = -1;
+	data->texture_n = NULL;
+	data->texture_s = NULL;
+	data->texture_w = NULL;
+	data->texture_e = NULL;
+	data->texture_f = -1;
+	data->texture_c = -1;
+	data->map = NULL;
+	data->buffer = NULL;
 }
