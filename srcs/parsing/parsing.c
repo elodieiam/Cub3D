@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/12 14:15:04 by niromano         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:48:00 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	get_rgb(char *tmp, t_data *data)
 	char	**rgb;
 
 	if (check_rgb(tmp) == 1)
-		clear_all_error(data, "RGB code example : \"0,0,255\"\n");
+		clear_all_error(data, "RGB code example : \"0,123,255\"\n");
 	rgb = ft_split(tmp, ',');
 	free(tmp);
 	if (rgb == NULL)
@@ -130,7 +130,7 @@ int	get_rgb(char *tmp, t_data *data)
 	b = ft_mini_atoi(rgb[2]);
 	clear_mat(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		clear_all_error(data, "RGB code min/max : 0/255\n");
+		clear_all_error(data, "RGB code range : [0,255]\n");
 	return (r << 16 | g << 8 | b);
 }
 
@@ -231,7 +231,24 @@ int	check_texture(char *s, t_data *data)
 	return (0);
 }
 
-void	check_buffer(t_data *data)
+void	delete_texture_buffer(t_data *data, t_list *tmp)
+{
+	int	len;
+
+	if (tmp == NULL)
+		clear_all_error(data, "No map in file\n");
+	len = ft_lstsize(data->buffer) - ft_lstsize(tmp);
+	while (len != 0)
+	{
+		free(data->buffer->content);
+		tmp = data->buffer;
+		data->buffer = data->buffer->next;
+		free(tmp);
+		len --;
+	}
+}
+
+void	take_texture(t_data *data)
 {
 	t_list	*tmp;
 
@@ -247,6 +264,7 @@ void	check_buffer(t_data *data)
 			|| data->texture_w == NULL || data->texture_e == NULL
 			|| data->texture_f == -1 || data->texture_c == -1)
 		clear_all_error(data, "Not all textures were found\n");
+	delete_texture_buffer(data, tmp);
 }
 
 void	parsing(int argc, char **argv, t_data *data)
@@ -260,5 +278,6 @@ void	parsing(int argc, char **argv, t_data *data)
 	if (data->fd == -1)
 		clear_all_error(data, "Can't open the file\n");
 	take_buffer(data);
-	check_buffer(data);
+	take_texture(data);
+	take_map(data);
 }
