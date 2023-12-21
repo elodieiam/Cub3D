@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/20 12:48:00 by niromano         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:52:34 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	take_buffer(t_data *data)
 
 int	search_texture(char *s)
 {
-	if (ft_strncmp(s, "NO", 2) == 0 && (s[2] == ' '
+	if (s[0] == '\0')
+		return (-2);
+	else if (ft_strncmp(s, "NO", 2) == 0 && (s[2] == ' '
 			|| (s[2] >= 9 && s[2] <= 13)))
 		return (1);
 	else if (ft_strncmp(s, "SO", 2) == 0 && (s[2] == ' '
@@ -141,7 +143,7 @@ void	fill_texture2(int value, char *tmp, t_data *data)
 		if (data->texture_e != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for East already given\n");
+			clear_all_error(data, "Duplicate East texture in file\n");
 		}
 		data->texture_e = tmp;
 	}
@@ -150,7 +152,7 @@ void	fill_texture2(int value, char *tmp, t_data *data)
 		if (data->texture_f != -1)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for Floor already given\n");
+			clear_all_error(data, "Duplicate Floor texture in file\n");
 		}
 		data->texture_f = get_rgb(tmp, data);
 	}
@@ -159,7 +161,7 @@ void	fill_texture2(int value, char *tmp, t_data *data)
 		if (data->texture_c != -1)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for Ceiling already given\n");
+			clear_all_error(data, "Duplicate Ceiling texture in file\n");
 		}
 		data->texture_c = get_rgb(tmp, data);
 	}
@@ -177,7 +179,7 @@ void	fill_texture(char *s, int value, t_data *data)
 		if (data->texture_n != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for North already given\n");
+			clear_all_error(data, "Duplicate North texture in file\n");
 		}
 		data->texture_n = tmp;
 	}
@@ -186,7 +188,7 @@ void	fill_texture(char *s, int value, t_data *data)
 		if (data->texture_s != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for South already given\n");
+			clear_all_error(data, "Duplicate South texture in file\n");
 		}
 		data->texture_s = tmp;
 	}
@@ -195,7 +197,7 @@ void	fill_texture(char *s, int value, t_data *data)
 		if (data->texture_w != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Texture for West already given\n");
+			clear_all_error(data, "Duplicate West texture in file\n");
 		}
 		data->texture_w = tmp;
 	}
@@ -214,8 +216,8 @@ int	check_texture(char *s, t_data *data)
 	while(s[i] != '\0' && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
 		i ++;
 	value = search_texture(&s[i]);
-	if (value == -1)
-		return (1);
+	if (value < 0)
+		return (value);
 	i += 2;
 	if (value == 5 || value == 6)
 		i -= 1;
@@ -251,19 +253,23 @@ void	delete_texture_buffer(t_data *data, t_list *tmp)
 void	take_texture(t_data *data)
 {
 	t_list	*tmp;
+	int		value;
 
 	tmp = data->buffer;
 	while (tmp != NULL)
 	{
-		if (check_texture(tmp->content, data) == 0)
+		value = check_texture(tmp->content, data);
+		if (value == 0)
 			tmp = tmp->next;
+		else if (value == -2)
+			clear_all_error(data, "A line is not empty in the file\n");
 		else
 			break ;
 	}
 	if (data->texture_n == NULL || data->texture_s == NULL
 			|| data->texture_w == NULL || data->texture_e == NULL
 			|| data->texture_f == -1 || data->texture_c == -1)
-		clear_all_error(data, "Not all textures were found\n");
+		clear_all_error(data, "Incorrect line or missing textures\n");
 	delete_texture_buffer(data, tmp);
 }
 

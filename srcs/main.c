@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/20 09:26:51 by niromano         ###   ########.fr       */
+/*   Updated: 2023/12/21 10:19:53 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	if (data == NULL)
 		clear_all_error(data, "Malloc Failed !\n");
 	parsing(argc, argv, data);
-	affiche_all(data);
+	// affiche_all(data);
 	clear_all(data);
 	return (0);
 }
