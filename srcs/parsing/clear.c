@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/12 12:03:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/11 03:25:33 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ void	clear_all(t_data *data)
 	{
 		if (data->fd != -1)
 			close(data->fd);
-		if (data->texture_n != NULL)
-			free(data->texture_n);
-		if (data->texture_s != NULL)
-			free(data->texture_s);
-		if (data->texture_w != NULL)
-			free(data->texture_w);
-		if (data->texture_e != NULL)
-			free(data->texture_e);
+		if (data->raw.texture_n != NULL)
+			free(data->raw.texture_n);
+		if (data->raw.texture_s != NULL)
+			free(data->raw.texture_s);
+		if (data->raw.texture_w != NULL)
+			free(data->raw.texture_w);
+		if (data->raw.texture_e != NULL)
+			free(data->raw.texture_e);
 		if (data->map != NULL)
 			clear_mat(data->map);
 		if (data->buffer != NULL)

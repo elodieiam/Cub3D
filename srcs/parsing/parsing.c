@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/21 12:52:34 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/11 03:42:49 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,30 +140,30 @@ void	fill_texture2(int value, char *tmp, t_data *data)
 {
 	if (value == 4)
 	{
-		if (data->texture_e != NULL)
+		if (data->raw.texture_e != NULL)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate East texture in file\n");
 		}
-		data->texture_e = tmp;
+		data->raw.texture_e = tmp;
 	}
 	else if (value == 5)
 	{
-		if (data->texture_f != -1)
+		if (data->raw.texture_f != -1)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate Floor texture in file\n");
 		}
-		data->texture_f = get_rgb(tmp, data);
+		data->raw.texture_f = get_rgb(tmp, data);
 	}
 	else if (value == 6)
 	{
-		if (data->texture_c != -1)
+		if (data->raw.texture_c != -1)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate Ceiling texture in file\n");
 		}
-		data->texture_c = get_rgb(tmp, data);
+		data->raw.texture_c = get_rgb(tmp, data);
 	}
 }
 
@@ -176,30 +176,30 @@ void	fill_texture(char *s, int value, t_data *data)
 		clear_all_error(data, "Malloc Failed !\n");
 	if (value == 1)
 	{
-		if (data->texture_n != NULL)
+		if (data->raw.texture_n != NULL)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate North texture in file\n");
 		}
-		data->texture_n = tmp;
+		data->raw.texture_n = tmp;
 	}
 	else if (value == 2)
 	{
-		if (data->texture_s != NULL)
+		if (data->raw.texture_s != NULL)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate South texture in file\n");
 		}
-		data->texture_s = tmp;
+		data->raw.texture_s = tmp;
 	}
 	else if (value == 3)
 	{
-		if (data->texture_w != NULL)
+		if (data->raw.texture_w != NULL)
 		{
 			free(tmp);
 			clear_all_error(data, "Duplicate West texture in file\n");
 		}
-		data->texture_w = tmp;
+		data->raw.texture_w = tmp;
 	}
 	else
 		fill_texture2(value, tmp, data);
@@ -213,7 +213,7 @@ int	check_texture(char *s, t_data *data)
 	i = 0;
 	if (s == NULL || s[i] == '\n')
 		return (0);
-	while(s[i] != '\0' && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+	while (s[i] != '\0' && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
 		i ++;
 	value = search_texture(&s[i]);
 	if (value < 0)
@@ -221,7 +221,7 @@ int	check_texture(char *s, t_data *data)
 	i += 2;
 	if (value == 5 || value == 6)
 		i -= 1;
-	while(s[i] != '\0' && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+	while (s[i] != '\0' && (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
 		i ++;
 	if (s[i] == '\0')
 	{
@@ -266,11 +266,34 @@ void	take_texture(t_data *data)
 		else
 			break ;
 	}
-	if (data->texture_n == NULL || data->texture_s == NULL
-			|| data->texture_w == NULL || data->texture_e == NULL
-			|| data->texture_f == -1 || data->texture_c == -1)
-		clear_all_error(data, "Incorrect line or missing textures\n");
+	if (data->raw.texture_n == NULL || data->raw.texture_s == NULL
+		|| data->raw.texture_w == NULL || data->raw.texture_e == NULL
+		|| data->raw.texture_f == -1 || data->raw.texture_c == -1)
+		clear_all_error(data, 
+			"Incorrect line or missing textures before map\n");
 	delete_texture_buffer(data, tmp);
+}
+
+void	open_texture(t_data *data)
+{
+	int	fd;
+	
+	fd = open(data->raw.texture_n, O_RDONLY);
+	if (fd == -1)
+		clear_all_error(data, "Can't read North Texture\n");
+	close(fd);
+	fd = open(data->raw.texture_s, O_RDONLY);
+	if (fd == -1)
+		clear_all_error(data, "Can't read South Texture\n");
+	close(fd);
+	fd = open(data->raw.texture_w, O_RDONLY);
+	if (fd == -1)
+		clear_all_error(data, "Can't read West Texture\n");
+	close(fd);
+	fd = open(data->raw.texture_e, O_RDONLY);
+	if (fd == -1)
+		clear_all_error(data, "Can't read East Texture\n");
+	close(fd);
 }
 
 void	parsing(int argc, char **argv, t_data *data)
@@ -285,5 +308,6 @@ void	parsing(int argc, char **argv, t_data *data)
 		clear_all_error(data, "Can't open the file\n");
 	take_buffer(data);
 	take_texture(data);
+	open_texture(data);
 	take_map(data);
 }

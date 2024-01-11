@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2023/12/20 12:54:46 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/11 03:24:06 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,44 @@
 # include <fcntl.h>
 
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
 
-typedef struct s_data
+typedef struct s_raw_textures
 {
-	int		fd;
 	char	*texture_n;
 	char	*texture_s;
 	char	*texture_w;
 	char	*texture_e;
 	int		texture_f;
 	int		texture_c;
-	char	**map;
-	t_list	*buffer;
+}	t_raw_textures;
+
+typedef struct s_textures
+{
+	void	*texture_n;
+	void	*texture_s;
+	void	*texture_w;
+	void	*texture_e;
+	int		texture_f;
+	int		texture_c;
+}	t_textures;
+
+typedef struct s_data
+{
+	int				fd;
+	t_raw_textures	raw;
+	t_textures		textures;
+	char			**map;
+	t_list			*buffer;
 }	t_data;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	t_data	*data;
+}	t_mlx;
 
 void	parsing(int argc, char **argv, t_data *data);
 void	set_data_null(t_data *data);
