@@ -6,32 +6,32 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 06:48:09 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:51:58 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	take_buffer(t_data *data)
+void	take_buffer(t_mlx *mlx)
 {
 	t_list	*buf;
 
-	buf = ft_lstnew(get_next_line(data->fd));
+	buf = ft_lstnew(get_next_line(mlx->data->fd));
 	if (buf == NULL)
-		clear_all_error(data, "Malloc Failed !\n");
+		clear_all_failed(mlx, "Malloc Failed !\n");
 	while (buf->content != NULL)
 	{
-		if (data->buffer == NULL)
-			data->buffer = buf;
+		if (mlx->data->buffer == NULL)
+			mlx->data->buffer = buf;
 		else
-			ft_lstadd_back(&data->buffer, buf);
-		buf = ft_lstnew(get_next_line(data->fd));
+			ft_lstadd_back(&mlx->data->buffer, buf);
+		buf = ft_lstnew(get_next_line(mlx->data->fd));
 		if (buf == NULL)
-			clear_all_error(data, "Malloc Failed !\n");
+			clear_all_failed(mlx, "Malloc Failed !\n");
 	}
-	ft_lstadd_back(&data->buffer, buf);
-	close(data->fd);
-	data->fd = -1;
+	ft_lstadd_back(&mlx->data->buffer, buf);
+	close(mlx->data->fd);
+	mlx->data->fd = -1;
 }
 
 int	search_texture(char *s)
@@ -114,7 +114,7 @@ int	check_rgb(char *tmp)
 	return (0);
 }
 
-int	get_rgb(char *tmp, t_data *data)
+int	get_rgb(char *tmp, t_mlx *mlx)
 {
 	int		r;
 	int		g;
@@ -122,90 +122,90 @@ int	get_rgb(char *tmp, t_data *data)
 	char	**rgb;
 
 	if (check_rgb(tmp) == 1)
-		clear_all_error(data, "RGB code example : \"0,123,255\"\n");
+		clear_all_failed(mlx, "RGB code example : \"0,123,255\"\n");
 	rgb = ft_split(tmp, ',');
 	free(tmp);
 	if (rgb == NULL)
-		clear_all_error(data, "Malloc Failed !\n");
+		clear_all_failed(mlx, "Malloc Failed !\n");
 	r = ft_mini_atoi(rgb[0]);
 	g = ft_mini_atoi(rgb[1]);
 	b = ft_mini_atoi(rgb[2]);
 	clear_mat(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		clear_all_error(data, "RGB code range : [0,255]\n");
+		clear_all_failed(mlx, "RGB code range : [0,255]\n");
 	return (r << 16 | g << 8 | b);
 }
 
-void	fill_texture2(int value, char *tmp, t_data *data)
+void	fill_texture2(int value, char *tmp, t_mlx *mlx)
 {
 	if (value == 4)
 	{
-		if (data->raw.texture_e != NULL)
+		if (mlx->data->raw.texture_e != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate East texture in file\n");
+			clear_all_failed(mlx, "Duplicate East texture in file\n");
 		}
-		data->raw.texture_e = tmp;
+		mlx->data->raw.texture_e = tmp;
 	}
 	else if (value == 5)
 	{
-		if (data->raw.texture_f != -1)
+		if (mlx->data->raw.texture_f != -1)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate Floor texture in file\n");
+			clear_all_failed(mlx, "Duplicate Floor texture in file\n");
 		}
-		data->raw.texture_f = get_rgb(tmp, data);
+		mlx->data->raw.texture_f = get_rgb(tmp, mlx);
 	}
 	else if (value == 6)
 	{
-		if (data->raw.texture_c != -1)
+		if (mlx->data->raw.texture_c != -1)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate Ceiling texture in file\n");
+			clear_all_failed(mlx, "Duplicate Ceiling texture in file\n");
 		}
-		data->raw.texture_c = get_rgb(tmp, data);
+		mlx->data->raw.texture_c = get_rgb(tmp, mlx);
 	}
 }
 
-void	fill_texture(char *s, int value, t_data *data)
+void	fill_texture(char *s, int value, t_mlx *mlx)
 {
 	char	*tmp;
 
 	tmp = ft_strtrim(s, " \f\n\r\t\v");
 	if (tmp == NULL)
-		clear_all_error(data, "Malloc Failed !\n");
+		clear_all_failed(mlx, "Malloc Failed !\n");
 	if (value == 1)
 	{
-		if (data->raw.texture_n != NULL)
+		if (mlx->data->raw.texture_n != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate North texture in file\n");
+			clear_all_failed(mlx, "Duplicate North texture in file\n");
 		}
-		data->raw.texture_n = tmp;
+		mlx->data->raw.texture_n = tmp;
 	}
 	else if (value == 2)
 	{
-		if (data->raw.texture_s != NULL)
+		if (mlx->data->raw.texture_s != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate South texture in file\n");
+			clear_all_failed(mlx, "Duplicate South texture in file\n");
 		}
-		data->raw.texture_s = tmp;
+		mlx->data->raw.texture_s = tmp;
 	}
 	else if (value == 3)
 	{
-		if (data->raw.texture_w != NULL)
+		if (mlx->data->raw.texture_w != NULL)
 		{
 			free(tmp);
-			clear_all_error(data, "Duplicate West texture in file\n");
+			clear_all_failed(mlx, "Duplicate West texture in file\n");
 		}
-		data->raw.texture_w = tmp;
+		mlx->data->raw.texture_w = tmp;
 	}
 	else
-		fill_texture2(value, tmp, data);
+		fill_texture2(value, tmp, mlx);
 }
 
-int	check_texture(char *s, t_data *data)
+int	check_texture(char *s, t_mlx *mlx)
 {
 	int	i;
 	int	value;
@@ -226,88 +226,88 @@ int	check_texture(char *s, t_data *data)
 	if (s[i] == '\0')
 	{
 		if (value == 5 || value == 6)
-			clear_all_error(data, "ID without RGB example : ID \"R,G,B\"\n");
-		clear_all_error(data, "ID without path example : ID \"path\"\n");
+			clear_all_failed(mlx, "ID without RGB example : ID \"R,G,B\"\n");
+		clear_all_failed(mlx, "ID without path example : ID \"path\"\n");
 	}
-	fill_texture(&s[i], value, data);
+	fill_texture(&s[i], value, mlx);
 	return (0);
 }
 
-void	delete_texture_buffer(t_data *data, t_list *tmp)
+void	delete_texture_buffer(t_mlx *mlx, t_list *tmp)
 {
 	int	len;
 
 	if (tmp == NULL)
-		clear_all_error(data, "No map in file\n");
-	len = ft_lstsize(data->buffer) - ft_lstsize(tmp);
+		clear_all_failed(mlx, "No map in file\n");
+	len = ft_lstsize(mlx->data->buffer) - ft_lstsize(tmp);
 	while (len != 0)
 	{
-		free(data->buffer->content);
-		tmp = data->buffer;
-		data->buffer = data->buffer->next;
+		free(mlx->data->buffer->content);
+		tmp = mlx->data->buffer;
+		mlx->data->buffer = mlx->data->buffer->next;
 		free(tmp);
 		len --;
 	}
 }
 
-void	take_texture(t_data *data)
+void	take_texture(t_mlx *mlx)
 {
 	t_list	*tmp;
 	int		value;
 
-	tmp = data->buffer;
+	tmp = mlx->data->buffer;
 	while (tmp != NULL)
 	{
-		value = check_texture(tmp->content, data);
+		value = check_texture(tmp->content, mlx);
 		if (value == 0)
 			tmp = tmp->next;
 		else if (value == -2)
-			clear_all_error(data, "A line is not empty in the file\n");
+			clear_all_failed(mlx, "A line is not empty in the file\n");
 		else
 			break ;
 	}
-	if (data->raw.texture_n == NULL || data->raw.texture_s == NULL
-		|| data->raw.texture_w == NULL || data->raw.texture_e == NULL
-		|| data->raw.texture_f == -1 || data->raw.texture_c == -1)
-		clear_all_error(data, 
+	if (mlx->data->raw.texture_n == NULL || mlx->data->raw.texture_s == NULL
+		|| mlx->data->raw.texture_w == NULL || mlx->data->raw.texture_e == NULL
+		|| mlx->data->raw.texture_f == -1 || mlx->data->raw.texture_c == -1)
+		clear_all_failed(mlx, 
 			"Incorrect line or missing textures before map\n");
-	delete_texture_buffer(data, tmp);
+	delete_texture_buffer(mlx, tmp);
 }
 
-void	open_texture(t_data *data)
+void	open_texture(t_mlx *mlx)
 {
 	int	fd;
 	
-	fd = open(data->raw.texture_n, O_RDONLY);
+	fd = open(mlx->data->raw.texture_n, O_RDONLY);
 	if (fd == -1)
-		clear_all_error(data, "Can't read North Texture\n");
+		clear_all_failed(mlx, "Can't read North Texture\n");
 	close(fd);
-	fd = open(data->raw.texture_s, O_RDONLY);
+	fd = open(mlx->data->raw.texture_s, O_RDONLY);
 	if (fd == -1)
-		clear_all_error(data, "Can't read South Texture\n");
+		clear_all_failed(mlx, "Can't read South Texture\n");
 	close(fd);
-	fd = open(data->raw.texture_w, O_RDONLY);
+	fd = open(mlx->data->raw.texture_w, O_RDONLY);
 	if (fd == -1)
-		clear_all_error(data, "Can't read West Texture\n");
+		clear_all_failed(mlx, "Can't read West Texture\n");
 	close(fd);
-	fd = open(data->raw.texture_e, O_RDONLY);
+	fd = open(mlx->data->raw.texture_e, O_RDONLY);
 	if (fd == -1)
-		clear_all_error(data, "Can't read East Texture\n");
+		clear_all_failed(mlx, "Can't read East Texture\n");
 	close(fd);
 }
 
-void	parsing(int argc, char **argv, t_data *data)
+void	parsing(int argc, char **argv, t_mlx *mlx)
 {
-	set_data_null(data);
+	set_data_null(mlx->data);
 	if (argc != 2)
-		clear_all_error(data, "Bad args example : ./cub3D \"file_path\"\n");
+		clear_all_failed(mlx, "Bad args example : ./cub3D \"file_path\"\n");
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5) != 0)
-		clear_all_error(data, "Bad extension example : \"*.cub\"\n");
-	data->fd = open(argv[1], O_RDONLY);
-	if (data->fd == -1)
-		clear_all_error(data, "Can't open the file\n");
-	take_buffer(data);
-	take_texture(data);
-	open_texture(data);
-	take_map(data);
+		clear_all_failed(mlx, "Bad extension example : \"*.cub\"\n");
+	mlx->data->fd = open(argv[1], O_RDONLY);
+	if (mlx->data->fd == -1)
+		clear_all_failed(mlx, "Can't open the file\n");
+	take_buffer(mlx);
+	take_texture(mlx);
+	open_texture(mlx);
+	take_map(mlx);
 }

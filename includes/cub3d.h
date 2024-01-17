@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 06:54:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:52:24 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ typedef struct s_mlx
 	t_data	*data;
 }	t_mlx;
 
-void	parsing(int argc, char **argv, t_data *data);
+void	set_mlx_null(t_mlx *mlx);
 void	set_data_null(t_data *data);
-void	take_map(t_data *data);
+
+void	parsing(int argc, char **argv, t_mlx *mlx);
+void	take_map(t_mlx *mlx);
 
 void	clear_mat(char **mat);
-void	clear_data(t_data *data);
-void	clear_all_error(t_data *data, char *error);
+int		clear_all_success(t_mlx *mlx);
+void	clear_all_failed(t_mlx *mlx, char *error);
 
 #endif

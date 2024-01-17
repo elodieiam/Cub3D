@@ -6,48 +6,11 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 07:36:01 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:41:35 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	clear_all_success(t_mlx *mlx)
-{
-	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_n);
-	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
-	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
-	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
-	mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx_destroy_display(mlx->mlx);
-	free(mlx->mlx);
-	clear_data(mlx->data);
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-void	clear_all_failed(t_mlx *mlx, char *error)
-{
-	if (mlx->data->textures.texture_n != NULL)
-		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_n);
-	if (mlx->data->textures.texture_s != NULL)
-		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
-	if (mlx->data->textures.texture_w != NULL)
-		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
-	if (mlx->data->textures.texture_e != NULL)
-		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
-	if (mlx->win != NULL)
-		mlx_destroy_window(mlx->mlx, mlx->win);
-	if (mlx->mlx != NULL)
-	{
-		mlx_destroy_display(mlx->mlx);
-		free(mlx->mlx);
-	}
-	clear_data(mlx->data);
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(error, 2);
-	exit(EXIT_FAILURE);
-}
 
 int	input(int key, t_mlx *mlx)
 {
@@ -107,13 +70,6 @@ void	set_textures(t_mlx *mlx)
 		clear_all_failed(mlx, "Error\n");
 }
 
-void	set_mlx_null(t_mlx *mlx)
-{
-	mlx->data = NULL;
-	mlx->mlx = NULL;
-	mlx->win = NULL;
-}
-
 int	main(int argc, char **argv)
 {
 	t_mlx	mlx;
@@ -125,7 +81,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nMalloc Failed !\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	parsing(argc, argv, mlx.data);
+	parsing(argc, argv, &mlx);
 	mlx.mlx = mlx_init();
 	if (mlx.mlx == NULL)
 		clear_all_failed(&mlx, "Init of MLX failed\n");

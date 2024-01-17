@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/11 03:00:33 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:50:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	check_map(t_data *data)
 	}
 }
 
-void	take_map(t_data *data)
+void	take_map(t_mlx *mlx)
 {
-	check_map(data);
-	printf("\nlen = %d\n", max_len(data));
+	check_map(mlx->data);
+	printf("\nlen = %d\n", max_len(mlx->data));
 }

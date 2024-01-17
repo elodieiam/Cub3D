@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 06:56:25 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 07:40:18 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,38 @@ void	clear_data(t_data *data)
 	}
 }
 
-void	clear_all_error(t_data *data, char *error)
+int	clear_all_success(t_mlx *mlx)
 {
-	clear_data(data);
+	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_n);
+	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
+	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
+	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
+	mlx_destroy_window(mlx->mlx, mlx->win);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
+	clear_data(mlx->data);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+void	clear_all_failed(t_mlx *mlx, char *error)
+{
+	if (mlx->data->textures.texture_n != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_n);
+	if (mlx->data->textures.texture_s != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
+	if (mlx->data->textures.texture_w != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
+	if (mlx->data->textures.texture_e != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
+	if (mlx->win != NULL)
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	if (mlx->mlx != NULL)
+	{
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
+	}
+	clear_data(mlx->data);
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(error, 2);
 	exit(EXIT_FAILURE);

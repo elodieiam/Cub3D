@@ -5,7 +5,7 @@ HEADERS = cub3d.h
 
 SOURCES = main.c \
 		parsing/parsing.c \
-		parsing/data.c \
+		parsing/set_null.c \
 		parsing/map.c \
 		parsing/clear.c
 
