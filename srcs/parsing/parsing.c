@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 07:51:58 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 08:09:31 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,83 +57,6 @@ int	search_texture(char *s)
 			|| (s[2] >= 9 && s[2] <= 13)))
 		return (6);
 	return (-1);
-}
-
-int	ft_mini_atoi(const char *nptr)
-{
-	int	i;
-	int	nb;
-
-	i = 0;
-	nb = 0;
-	if (ft_strlen(nptr) > 3)
-		return (-1);
-	if (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		while (nptr[i] >= '0' && nptr[i] <= '9')
-		{
-			nb = nb * 10;
-			nb = nb + nptr[i] - 48;
-			i ++;
-		}
-		if (nptr[i] != '\0')
-			return (-1);
-		else
-			return (nb);
-	}
-	return (-1);
-}
-
-int	check_rgb(char *tmp)
-{
-	int	i;
-	int	nb;
-	int	comma;
-
-	i = 0;
-	nb = 0;
-	comma = 0;
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] == ',')
-		{
-			if (nb > 3)
-				return (1);
-			else
-				nb = 0;
-			comma ++;
-		}
-		else if (ft_isdigit(tmp[i]) == 1)
-			nb ++;
-		else
-			return (1);
-		i ++;
-	}
-	if (comma != 2)
-		return (1);
-	return (0);
-}
-
-int	get_rgb(char *tmp, t_mlx *mlx)
-{
-	int		r;
-	int		g;
-	int		b;
-	char	**rgb;
-
-	if (check_rgb(tmp) == 1)
-		clear_all_failed(mlx, "RGB code example : \"0,123,255\"\n");
-	rgb = ft_split(tmp, ',');
-	free(tmp);
-	if (rgb == NULL)
-		clear_all_failed(mlx, "Malloc Failed !\n");
-	r = ft_mini_atoi(rgb[0]);
-	g = ft_mini_atoi(rgb[1]);
-	b = ft_mini_atoi(rgb[2]);
-	clear_mat(rgb);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		clear_all_failed(mlx, "RGB code range : [0,255]\n");
-	return (r << 16 | g << 8 | b);
 }
 
 void	fill_texture2(int value, char *tmp, t_mlx *mlx)
@@ -269,7 +192,7 @@ void	take_texture(t_mlx *mlx)
 	if (mlx->data->raw.texture_n == NULL || mlx->data->raw.texture_s == NULL
 		|| mlx->data->raw.texture_w == NULL || mlx->data->raw.texture_e == NULL
 		|| mlx->data->raw.texture_f == -1 || mlx->data->raw.texture_c == -1)
-		clear_all_failed(mlx, 
+		clear_all_failed(mlx,
 			"Incorrect line or missing textures before map\n");
 	delete_texture_buffer(mlx, tmp);
 }
@@ -277,7 +200,7 @@ void	take_texture(t_mlx *mlx)
 void	open_texture(t_mlx *mlx)
 {
 	int	fd;
-	
+
 	fd = open(mlx->data->raw.texture_n, O_RDONLY);
 	if (fd == -1)
 		clear_all_failed(mlx, "Can't read North Texture\n");

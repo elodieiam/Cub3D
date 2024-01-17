@@ -6,7 +6,9 @@ HEADERS = cub3d.h
 SOURCES = main.c \
 		parsing/parsing.c \
 		parsing/set_null.c \
+		parsing/rgb.c \
 		parsing/map.c \
+		parsing/set_textures.c \
 		parsing/clear.c
 
 SRC = srcs/

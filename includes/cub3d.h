@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 07:52:24 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:19:32 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,20 @@ typedef struct s_textures
 	char	*texture_c;
 }	t_textures;
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	pov;
+}	t_player;
+
 typedef struct s_data
 {
 	int				fd;
 	t_raw_textures	raw;
 	t_textures		textures;
 	char			**map;
+	t_player		player;
 	t_list			*buffer;
 }	t_data;
 
@@ -64,7 +72,9 @@ void	set_mlx_null(t_mlx *mlx);
 void	set_data_null(t_data *data);
 
 void	parsing(int argc, char **argv, t_mlx *mlx);
+int		get_rgb(char *tmp, t_mlx *mlx);
 void	take_map(t_mlx *mlx);
+void	set_textures(t_mlx *mlx);
 
 void	clear_mat(char **mat);
 int		clear_all_success(t_mlx *mlx);
