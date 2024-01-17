@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/11 03:24:06 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 06:54:20 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_textures
 	void	*texture_s;
 	void	*texture_w;
 	void	*texture_e;
-	int		texture_f;
-	int		texture_c;
+	char	*texture_f;
+	char	*texture_c;
 }	t_textures;
 
 typedef struct s_data
@@ -65,7 +65,7 @@ void	set_data_null(t_data *data);
 void	take_map(t_data *data);
 
 void	clear_mat(char **mat);
-void	clear_all(t_data *data);
+void	clear_data(t_data *data);
 void	clear_all_error(t_data *data, char *error);
 
 #endif
