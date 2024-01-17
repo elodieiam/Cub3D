@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 10:24:49 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:17:29 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,31 @@ int	check_empty_line_map(char *s)
 	return (0);
 }
 
+void	verify_character(t_mlx *mlx)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = mlx->data->buffer;
+	while (tmp->next != NULL)
+	{
+		i = 0;
+		while (tmp->content[i] != '\0' && tmp->content[i] != '\n')
+		{
+			if (tmp->content[i] != '0' && tmp->content[i] != '1'
+				&& tmp->content[i] != 'N' && tmp->content[i] != 'S'
+				&& tmp->content[i] != 'W' && tmp->content[i] != 'E'
+				&& tmp->content[i] != ' '
+				&& !(tmp->content[i] >= 9 && tmp->content[i] <= 13))
+			{
+				clear_all_failed(mlx, "Invalid character in the map\n");
+			}
+			i ++;
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	check_map(t_mlx *mlx)
 {
 	t_list	*tmp;
@@ -78,6 +103,7 @@ void	check_map(t_mlx *mlx)
 			clear_all_failed(mlx, "Empty line in the map\n");
 		tmp = tmp->next;
 	}
+	verify_character(mlx);
 }
 
 char	*fill_map(char *s, int len)
@@ -135,11 +161,34 @@ void	search_player(t_mlx *mlx)
 	}
 }
 
-void	check_border(t_mlx *mlx)
-{
-	(void)mlx;
-	return ;
-}
+// void	check_border(t_mlx *mlx)
+// {
+// 	int		i;
+// 	int		j;
+
+// 	i = 0;
+// 	while (mlx->data->map[i] != NULL)
+// 	{
+// 		j = 0;
+// 		while (mlx->data->map[i][j] != '\0')
+// 		{
+// 			if (mlx->data->map[i][j] == '0' || mlx->data->map[i][j] == 'N'
+// 				|| mlx->data->map[i][j] == 'S' || mlx->data->map[i][j] == 'W'
+// 				|| mlx->data->map[i][j] == 'E')
+// 			{
+// 				if (mlx->data->map[i - 1][j] == '2'
+// 					|| mlx->data->map[i][j - 1] == '2'
+// 					|| mlx->data->map[i + 1][j] == '2'
+// 					|| mlx->data->map[i][j + 1] == '2')
+// 					{
+// 						clear_all_failed(mlx, "The map is not closed\n");
+// 					}
+// 			}
+// 			j ++;
+// 		}
+// 		i ++;
+// 	}
+// }
 
 void	take_map(t_mlx *mlx)
 {
@@ -166,5 +215,5 @@ void	take_map(t_mlx *mlx)
 	search_player(mlx);
 	if (mlx->data->player.pov == '\0')
 		clear_all_failed(mlx, "No spawn point in the map\n");
-	check_border(mlx);
+	// check_border(mlx);
 }
