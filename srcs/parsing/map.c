@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 11:17:29 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:11:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	check_map(t_mlx *mlx)
 		i = 0;
 		if (check_empty_line_map(tmp->content) == 1)
 			clear_all_failed(mlx, "Empty line in the map\n");
+		i ++;
 		tmp = tmp->next;
 	}
 	verify_character(mlx);
@@ -118,14 +119,14 @@ char	*fill_map(char *s, int len)
 	while (s[i] != '\n' && s[i] != '\0')
 	{
 		if (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
-			new_s[i] = '2';
+			new_s[i] = '.';
 		else
 			new_s[i] = s[i];
 		i ++;
 	}
 	while (i != len)
 	{
-		new_s[i] = '2';
+		new_s[i] = '.';
 		i ++;
 	}
 	new_s[i] = '\0';
@@ -202,16 +203,20 @@ void	take_map(t_mlx *mlx)
 	len = max_len(mlx);
 	check_map(mlx);
 	tmp = mlx->data->buffer;
-	mlx->data->map = malloc(sizeof(char*) * (line + 1));
+	mlx->data->map = malloc(sizeof(char *) * (line + 1));
 	if (mlx->data->map == NULL)
 		clear_all_failed(mlx, "Malloc Failed !\n");
 	while (i != line)
 	{
 		mlx->data->map[i] = fill_map(tmp->content, len);
+		if (mlx->data->map[i] == NULL)
+			clear_all_failed(mlx, "Malloc Failed !\n");
 		tmp = tmp->next;
 		i ++;
 	}
 	mlx->data->map[i] = NULL;
+	clear_list(mlx->data->buffer);
+	mlx->data->buffer = NULL;
 	search_player(mlx);
 	if (mlx->data->player.pov == '\0')
 		clear_all_failed(mlx, "No spawn point in the map\n");

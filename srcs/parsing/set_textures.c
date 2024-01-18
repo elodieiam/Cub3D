@@ -6,11 +6,23 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:00:11 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 08:07:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/18 09:59:21 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	clear_raw(t_mlx *mlx)
+{
+	free(mlx->data->raw.texture_n);
+	mlx->data->raw.texture_n = NULL;
+	free(mlx->data->raw.texture_s);
+	mlx->data->raw.texture_s = NULL;
+	free(mlx->data->raw.texture_w);
+	mlx->data->raw.texture_w = NULL;
+	free(mlx->data->raw.texture_e);
+	mlx->data->raw.texture_e = NULL;
+}
 
 char	*get_hexacode(t_mlx *mlx, int code, char *base)
 {
@@ -72,4 +84,5 @@ void	set_textures(t_mlx *mlx)
 	if (mlx->data->textures.texture_e == NULL)
 		clear_all_failed(mlx, "Error\n");
 	set_hexacode(mlx);
+	clear_raw(mlx);
 }
