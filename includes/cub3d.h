@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 13:15:43 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:47:32 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define SCREEN_Y 720
 
 # define CASE_LEN 30
+# define SPEED 0.01
 
 typedef struct s_raw_textures
 {
@@ -75,6 +76,8 @@ typedef struct s_buf
 	int		endian;
 }	t_buf;
 
+typedef int t_bool;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -82,6 +85,7 @@ typedef struct s_mlx
 	t_data	*data;
 	t_buf	buffer;
 	int		timer;
+	t_bool	hook[6];
 }	t_mlx;
 
 void	set_mlx_null(t_mlx *mlx);

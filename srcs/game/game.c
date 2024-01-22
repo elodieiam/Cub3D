@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 13:19:47 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:46:05 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,24 @@ void	player(t_mlx *mlx)
 	}
 }
 
+void	player_move(t_mlx *mlx)
+{
+	if (mlx->hook[0] == 0 && mlx->data->player.y > 0.2)
+		mlx->data->player.y -= SPEED;
+	if (mlx->hook[1] == 0)
+		mlx->data->player.y += SPEED;
+	if (mlx->hook[2] == 0 && mlx->data->player.x > 0.2)
+		mlx->data->player.x -= SPEED;
+	if (mlx->hook[3] == 0)
+		mlx->data->player.x += SPEED;
+}
+
 int	game(t_mlx *mlx)
 {
 	background(mlx);
 	map(mlx);
 	player(mlx);
+	player_move(mlx);
 	// minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
 	return (0);

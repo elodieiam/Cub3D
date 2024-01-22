@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:40:18 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:28:09 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	set_mlx_null(t_mlx *mlx)
 	mlx->mlx = NULL;
 	mlx->win = NULL;
 	mlx->buffer.img = NULL;
+	mlx->hook[0] = 1;
+	mlx->hook[1] = 1;
+	mlx->hook[2] = 1;
+	mlx->hook[3] = 1;
+	mlx->hook[4] = 1;
+	mlx->hook[5] = 1;
 }
 
 void	set_data_null(t_data *data)

@@ -6,41 +6,46 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 13:20:18 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:25:55 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	input(int key, t_mlx *mlx)
+int	get_hook(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
 		clear_all_success(mlx);
-	if (key == 119 && mlx->data->player.y > 0.2)
-		mlx->data->player.y -= 0.1;
-	if (key == 115)
-		mlx->data->player.y += 0.1;
-	printf("%f\n", mlx->data->player.y);
+	else if (key == 'w')
+		mlx->hook[0] = 0;
+	else if (key == 's')
+		mlx->hook[1] = 0;
+	else if (key == 'a')
+		mlx->hook[2] = 0;
+	else if (key == 'd')
+		mlx->hook[3] = 0;
+	else if (key == XK_Left)
+		mlx->hook[4] = 0;
+	else if (key == XK_Right)
+		mlx->hook[5] = 0;
 	return (0);
 }
 
-void	affiche_info(t_mlx *mlx)
+int	input(int key, t_mlx *mlx)
 {
-	// printf("North : %p\n", mlx->data->textures.texture_n);
-	// printf("South : %p\n", mlx->data->textures.texture_s);
-	// printf("West : %p\n", mlx->data->textures.texture_w);
-	// printf("East : %p\n", mlx->data->textures.texture_e);
-	// printf("Floor : %s\n", mlx->data->textures.texture_f);
-	// printf("Ceiling : %s\n", mlx->data->textures.texture_c);
-	// printf("\n");
-	printf("Player info : %f/%f %c\n", mlx->data->player.x, mlx->data->player.y, mlx->data->player.pov);
-	printf("\n");
-	int i = 0;
-	while (mlx->data->map[i] != NULL)
-	{
-		printf("%s\n", mlx->data->map[i]);
-		i ++;
-	}
+	if (key == 'w')
+		mlx->hook[0] = 1;
+	else if (key == 's')
+		mlx->hook[1] = 1;
+	else if (key == 'a')
+		mlx->hook[2] = 1;
+	else if (key == 'd')
+		mlx->hook[3] = 1;
+	else if (key == XK_Left)
+		mlx->hook[4] = 1;
+	else if (key == XK_Right)
+		mlx->hook[5] = 1;
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -65,8 +70,8 @@ int	main(int argc, char **argv)
 	mlx.buffer.img = mlx_new_image(mlx.mlx, SCREEN_X, SCREEN_Y);
 	mlx.buffer.addr = mlx_get_data_addr(mlx.buffer.img, &mlx.buffer.bits_per_pixel, &mlx.buffer.line_length, &mlx.buffer.endian);
 	set_textures(&mlx);
-	affiche_info(&mlx);
-	mlx_hook(mlx.win, KeyPress, KeyPressMask, input, &mlx);
+	mlx_hook(mlx.win, KeyPress, KeyPressMask, get_hook, &mlx);
+	mlx_hook(mlx.win, KeyRelease, KeyReleaseMask, input, &mlx);
 	mlx_hook(mlx.win, 17, 0, clear_all_success, &mlx);
 	mlx_loop_hook(mlx.mlx, game, &mlx);
 	mlx_loop(mlx.mlx);
