@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 14:46:05 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:55:07 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,73 @@ void	player_move(t_mlx *mlx)
 		mlx->data->player.x += SPEED;
 }
 
+void	carre(t_mlx *mlx, float start[2], float end[2], int color)
+{
+	float	x;
+	float	y;
+
+	x = start[0];
+	y = start[1];
+	while (x != end[0])
+	{
+		my_mlx_pixel_put(&mlx->buffer, x, y, color);
+		if (x > end[0])
+			x --;
+		else
+			x ++;
+	}
+	x = start[0];
+	while (y != end[1])
+	{
+		my_mlx_pixel_put(&mlx->buffer, x, y, color);
+		if (y > end[1])
+			y --;
+		else
+			y ++;
+	}
+}
+
+void	put_line(t_mlx *mlx, float start[2], float end[2], int color)
+{
+	float	x;
+	float	y;
+	float	res;
+
+	x = start[0];
+	y = start[1];
+	carre(mlx, start, end, color);
+	res = (start[0] - end[0]) / (start[1] - end[1]);
+	printf("%f / %f = %f\n", (start[0] - end[0]), (start[1] - end[1]), res);
+	while (x != end[0] && y != end[1])
+	{
+		my_mlx_pixel_put(&mlx->buffer, x, y, color);
+		if (x != end[0])
+		{
+			if (x < end[0])
+				x ++;
+			else
+				x --;
+		}
+		if (y != end[1])
+		{
+			if (y < end[1])
+				y ++;
+			else
+				y --;
+		}
+	}
+}
+
 int	game(t_mlx *mlx)
 {
 	background(mlx);
-	map(mlx);
-	player(mlx);
-	player_move(mlx);
+	// map(mlx);
+	// player(mlx);
+	// player_move(mlx);
 	// minimap(mlx);
+	float tab1[2] = {200,200};
+	float tab2[2] = {250,500};
+	put_line(mlx, tab1, tab2, 0x000000);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
 	return (0);
 }
