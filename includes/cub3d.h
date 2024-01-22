@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/18 09:36:38 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:39:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+
+# define SCREEN_X 1280
+# define SCREEN_Y 720
 
 typedef struct s_raw_textures
 {
@@ -61,11 +64,22 @@ typedef struct s_data
 	t_list			*buffer;
 }	t_data;
 
+typedef struct s_buf
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_buf;
+
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_data	*data;
+	t_buf	buffer;
+	int		timer;
 }	t_mlx;
 
 void	set_mlx_null(t_mlx *mlx);
@@ -75,6 +89,10 @@ void	parsing(int argc, char **argv, t_mlx *mlx);
 int		get_rgb(char *tmp, t_mlx *mlx);
 void	take_map(t_mlx *mlx);
 void	set_textures(t_mlx *mlx);
+
+void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
+int		game(t_mlx *mlx);
+void	minimap(t_mlx *mlx);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);

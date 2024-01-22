@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:39:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:39:38 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	minimap(t_mlx *mlx)
+void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = buf->addr + (y * buf->line_length + x * (buf->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	background(t_mlx *mlx)
 {
 	int	x;
 	int	y;
@@ -24,10 +32,20 @@ void	minimap(t_mlx *mlx)
 		y = 0;
 		while (y != SCREEN_Y)
 		{
-			if ((x > SCREEN_X - 220 && x < SCREEN_X - 20) && (y > 20 && y < 220))
-				my_mlx_pixel_put(&mlx->buffer, x, y, 0x000000);
+			if (y < SCREEN_Y / 2)
+				my_mlx_pixel_put(&mlx->buffer, x, y, mlx->data->raw.texture_f);
+			else
+				my_mlx_pixel_put(&mlx->buffer, x, y, mlx->data->raw.texture_c);
 			y ++;
 		}
 		x ++;
 	}
+}
+
+int	game(t_mlx *mlx)
+{
+	background(mlx);
+	minimap(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
+	return (0);
 }

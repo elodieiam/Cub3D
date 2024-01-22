@@ -9,8 +9,9 @@ SOURCES = main.c \
 		parsing/rgb.c \
 		parsing/map.c \
 		parsing/set_textures.c \
-		parsing/clear.c \
-		minimap/minimap.c
+		game/game.c \
+		minimap/minimap.c \
+		parsing/clear.c
 
 SRC = srcs/
 DIR = objs_deps/
@@ -44,6 +45,8 @@ $(DIR) :
 	@echo "Wait ..."
 	@mkdir -p objs_deps
 	@mkdir -p objs_deps/parsing
+	@mkdir -p objs_deps/game
+	@mkdir -p objs_deps/minimap
 
 clean :
 	@echo "Deleting Objects and Dependencies"

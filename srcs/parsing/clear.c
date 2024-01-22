@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 07:40:18 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:40:13 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	clear_all_success(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
+	mlx_destroy_image(mlx->mlx, mlx->buffer.img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
@@ -89,6 +90,8 @@ void	clear_all_failed(t_mlx *mlx, char *error)
 		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
 	if (mlx->data->textures.texture_e != NULL)
 		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
+	if (mlx->buffer.img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->buffer.img);
 	if (mlx->win != NULL)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 	if (mlx->mlx != NULL)

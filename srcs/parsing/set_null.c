@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 10:18:49 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:40:18 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	set_mlx_null(t_mlx *mlx)
 	mlx->data = NULL;
 	mlx->mlx = NULL;
 	mlx->win = NULL;
+	mlx->buffer.img = NULL;
 }
 
 void	set_data_null(t_data *data)
