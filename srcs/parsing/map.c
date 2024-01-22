@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/18 10:11:50 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 07:06:28 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,34 +162,47 @@ void	search_player(t_mlx *mlx)
 	}
 }
 
-// void	check_border(t_mlx *mlx)
-// {
-// 	int		i;
-// 	int		j;
+int	ft_strlen_mat(char **mat)
+{
+	int	i;
 
-// 	i = 0;
-// 	while (mlx->data->map[i] != NULL)
-// 	{
-// 		j = 0;
-// 		while (mlx->data->map[i][j] != '\0')
-// 		{
-// 			if (mlx->data->map[i][j] == '0' || mlx->data->map[i][j] == 'N'
-// 				|| mlx->data->map[i][j] == 'S' || mlx->data->map[i][j] == 'W'
-// 				|| mlx->data->map[i][j] == 'E')
-// 			{
-// 				if (mlx->data->map[i - 1][j] == '2'
-// 					|| mlx->data->map[i][j - 1] == '2'
-// 					|| mlx->data->map[i + 1][j] == '2'
-// 					|| mlx->data->map[i][j + 1] == '2')
-// 					{
-// 						clear_all_failed(mlx, "The map is not closed\n");
-// 					}
-// 			}
-// 			j ++;
-// 		}
-// 		i ++;
-// 	}
-// }
+	i = 0;
+	while (mat[i] != NULL)
+		i ++;
+	return (i);
+}
+
+void	check_border(t_mlx *mlx)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (mlx->data->map[i] != NULL)
+	{
+		j = 0;
+		while (mlx->data->map[i][j] != '\0')
+		{
+			if ((i == 0 || j == 0 || i == ft_strlen_mat(mlx->data->map) - 1
+					|| j == (int)ft_strlen(mlx->data->map[i]) - 1) && mlx->data->map[i][j] == '0')
+				clear_all_failed(mlx, "The map is not closed\n");
+			else if (mlx->data->map[i][j] == '0' || mlx->data->map[i][j] == 'N'
+				|| mlx->data->map[i][j] == 'S' || mlx->data->map[i][j] == 'W'
+				|| mlx->data->map[i][j] == 'E')
+			{
+				if (mlx->data->map[i - 1][j] == '.'
+					|| mlx->data->map[i][j - 1] == '.'
+					|| mlx->data->map[i + 1][j] == '.'
+					|| mlx->data->map[i][j + 1] == '.')
+					{
+						clear_all_failed(mlx, "The map is not closed\n");
+					}
+			}
+			j ++;
+		}
+		i ++;
+	}
+}
 
 void	take_map(t_mlx *mlx)
 {
@@ -220,5 +233,5 @@ void	take_map(t_mlx *mlx)
 	search_player(mlx);
 	if (mlx->data->player.pov == '\0')
 		clear_all_failed(mlx, "No spawn point in the map\n");
-	// check_border(mlx);
+	check_border(mlx);
 }
