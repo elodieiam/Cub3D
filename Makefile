@@ -9,7 +9,8 @@ SOURCES = main.c \
 		parsing/rgb.c \
 		parsing/map.c \
 		parsing/set_textures.c \
-		parsing/clear.c
+		parsing/clear.c \
+		minimap/minimap.c
 
 SRC = srcs/
 DIR = objs_deps/
