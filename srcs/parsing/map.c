@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 07:06:28 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:04:49 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ void	search_player(t_mlx *mlx)
 					clear_all_failed(mlx, "More than one spawn point in the map\n");
 				else
 				{
-					mlx->data->player.x = i;
-					mlx->data->player.y = j;
+					mlx->data->player.x = i + 0.5;
+					mlx->data->player.y = j + 0.5;
 					mlx->data->player.pov = mlx->data->map[i][j];
 				}
 			}

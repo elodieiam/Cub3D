@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:40:06 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:20:18 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	input(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
 		clear_all_success(mlx);
+	if (key == 119 && mlx->data->player.y > 0.2)
+		mlx->data->player.y -= 0.1;
+	if (key == 115)
+		mlx->data->player.y += 0.1;
+	printf("%f\n", mlx->data->player.y);
 	return (0);
 }
 
@@ -28,7 +33,7 @@ void	affiche_info(t_mlx *mlx)
 	// printf("Floor : %s\n", mlx->data->textures.texture_f);
 	// printf("Ceiling : %s\n", mlx->data->textures.texture_c);
 	// printf("\n");
-	printf("Player info : %d/%d %c\n", mlx->data->player.x, mlx->data->player.y, mlx->data->player.pov);
+	printf("Player info : %f/%f %c\n", mlx->data->player.x, mlx->data->player.y, mlx->data->player.pov);
 	printf("\n");
 	int i = 0;
 	while (mlx->data->map[i] != NULL)

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:39:43 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:15:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define SCREEN_X 1280
 # define SCREEN_Y 720
+
+# define CASE_LEN 30
 
 typedef struct s_raw_textures
 {
@@ -49,8 +51,8 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float	x;
+	float	y;
 	char	pov;
 }	t_player;
 
@@ -91,6 +93,7 @@ void	take_map(t_mlx *mlx);
 void	set_textures(t_mlx *mlx);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
+void	print_cube(t_mlx *mlx, int x, int y, char cube);
 int		game(t_mlx *mlx);
 void	minimap(t_mlx *mlx);
 

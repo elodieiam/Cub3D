@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:39:38 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:19:47 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,59 @@ void	background(t_mlx *mlx)
 	}
 }
 
+void	map(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	while (mlx->data->map[i] != NULL)
+	{
+		j = 0;
+		while (mlx->data->map[i][j] != '\0')
+		{
+			print_cube(mlx, x, y, mlx->data->map[i][j]);
+			j ++;
+			x += CASE_LEN;
+		}
+		i ++;
+		x = 0;
+		y += CASE_LEN;
+	}
+}
+
+void	player(t_mlx *mlx)
+{
+	int	x;
+	int	y;
+	int	i;
+	int	j;
+
+	x = mlx->data->player.x * CASE_LEN;
+	y = mlx->data->player.y * CASE_LEN;
+	i = -3;
+	while (i != 3)
+	{
+		j = -3;
+		while (j != 3)
+		{
+			my_mlx_pixel_put(&mlx->buffer, x + i, y + j, 0xFF0000);
+			j ++;
+		}
+		i ++;
+	}
+}
+
 int	game(t_mlx *mlx)
 {
 	background(mlx);
-	minimap(mlx);
+	map(mlx);
+	player(mlx);
+	// minimap(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
 	return (0);
 }
