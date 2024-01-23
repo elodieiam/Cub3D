@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 18:55:07 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 09:59:02 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	player_move(t_mlx *mlx)
 		mlx->data->player.x += SPEED;
 }
 
-void	carre(t_mlx *mlx, float start[2], float end[2], int color)
+void	carre(t_mlx *mlx, int start[2], int end[2], int color)
 {
 	float	x;
 	float	y;
@@ -127,34 +127,87 @@ void	carre(t_mlx *mlx, float start[2], float end[2], int color)
 	}
 }
 
-void	put_line(t_mlx *mlx, float start[2], float end[2], int color)
+void	get_fraction(int x, int y, int fraction[2], int save[2])
 {
-	float	x;
-	float	y;
-	float	res;
+	int	tmp;
 
-	x = start[0];
-	y = start[1];
-	carre(mlx, start, end, color);
-	res = (start[0] - end[0]) / (start[1] - end[1]);
-	printf("%f / %f = %f\n", (start[0] - end[0]), (start[1] - end[1]), res);
-	while (x != end[0] && y != end[1])
+	if (x < 0)
+		x = x * -1;
+	if (y < 0)
+		y = y * -1;
+	if (x > y)
+		tmp = y;
+	else
+		tmp = x;
+	fraction[0] = x;
+	fraction[1] = y;
+	while (tmp > 0)
 	{
-		my_mlx_pixel_put(&mlx->buffer, x, y, color);
-		if (x != end[0])
+		if ((x / tmp > 0 && x % tmp == 0) && (y / tmp > 0 && y % tmp == 0))
 		{
-			if (x < end[0])
-				x ++;
-			else
-				x --;
+			fraction[0] = x / tmp;
+			fraction[1] = y / tmp;
+			save[0] = fraction[0];
+			save[1] = fraction[1];
+			break ;
 		}
-		if (y != end[1])
-		{
-			if (y < end[1])
-				y ++;
-			else
-				y --;
-		}
+		tmp --;
+	}
+}
+
+void	name(int fraction[2], int save[2], int coord[2], int end[2])
+{
+	if (fraction[0] > fraction[1])
+	{
+		if (coord[0] < end[0])
+			coord[0] ++;
+		else
+			coord[0] --;
+		fraction[0] --;
+	}
+	else if (fraction[0] < fraction[1])
+	{
+		if (coord[1] < end[1])
+			coord[1] ++;
+		else
+			coord[1] --;
+		fraction[1] --;
+	}
+	else if (fraction[0] == 0)
+	{
+		fraction[0] = save[0];
+		fraction[1] = save[1];
+	}
+	else
+	{
+		if (coord[0] < end[0])
+			coord[0] ++;
+		else
+			coord[0] --;
+		if (coord[1] < end[1])
+			coord[1] ++;
+		else
+			coord[1] --;
+		fraction[0] --;
+		fraction[1] --;
+	}
+}
+
+void	put_line(t_mlx *mlx, int start[2], int end[2])
+{
+	int	coord[2];
+	int	fraction[2];
+	int	save[2];
+
+	coord[0] = start[0];
+	coord[1] = start[1];
+	carre(mlx, start, end, 0x000000);
+	get_fraction(start[0] - end[0], start[1] - end[1], fraction, save);
+	printf("fraction : %d / %d\n", fraction[0], fraction[1]);
+	while (coord[0] != end[0] && coord[1] != end[1])
+	{
+		my_mlx_pixel_put(&mlx->buffer, coord[0], coord[1], 0x000000);
+		name(fraction, save, coord, end);
 	}
 }
 
@@ -165,9 +218,9 @@ int	game(t_mlx *mlx)
 	// player(mlx);
 	// player_move(mlx);
 	// minimap(mlx);
-	float tab1[2] = {200,200};
-	float tab2[2] = {250,500};
-	put_line(mlx, tab1, tab2, 0x000000);
+	int tab1[2] = {300,450};
+	int tab2[2] = {200,200};
+	put_line(mlx, tab1, tab2);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
 	return (0);
 }
