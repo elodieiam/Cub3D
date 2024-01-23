@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/23 10:40:39 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:32:12 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ int	game(t_mlx *mlx)
 	player(mlx);
 	player_move(mlx);
 	// minimap(mlx);
-	mlx->line_coord[0] = 100;
-	mlx->line_coord[1] = 100;
-	mlx->line_coord[2] = 1200;
-	mlx->line_coord[3] = 600;
-	put_line(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
 	return (0);
 }

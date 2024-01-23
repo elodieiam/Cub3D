@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/23 10:40:28 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:30:44 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SCREEN_Y 720
 
 # define CASE_LEN 30
-# define SPEED 0.01
+# define SPEED 0.05
 
 typedef struct s_raw_textures
 {
@@ -98,7 +98,7 @@ void	take_map(t_mlx *mlx);
 void	set_textures(t_mlx *mlx);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
-void	put_line(t_mlx *mlx);
+void	put_line(t_mlx *mlx, int color);
 
 int		game(t_mlx *mlx);
 
