@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 17:36:57 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:40:28 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ typedef struct s_mlx
 	void	*win;
 	t_data	*data;
 	t_buf	buffer;
-	int		timer;
 	t_bool	hook[6];
+	int		line_coord[4];
 }	t_mlx;
 
 void	set_mlx_null(t_mlx *mlx);
@@ -98,9 +98,15 @@ void	take_map(t_mlx *mlx);
 void	set_textures(t_mlx *mlx);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
-void	print_cube(t_mlx *mlx, int x, int y, char cube);
+void	put_line(t_mlx *mlx);
+
 int		game(t_mlx *mlx);
+
+void	map(t_mlx *mlx);
 void	minimap(t_mlx *mlx);
+
+void	player(t_mlx *mlx);
+void	player_move(t_mlx *mlx);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);

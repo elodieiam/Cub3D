@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 14:25:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:24:25 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nMalloc Failed !\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	mlx.timer = 0;
 	parsing(argc, argv, &mlx);
 	mlx.mlx = mlx_init();
 	if (mlx.mlx == NULL)

@@ -9,9 +9,12 @@ SOURCES = main.c \
 		parsing/rgb.c \
 		parsing/map.c \
 		parsing/set_textures.c \
+		parsing/clear.c \
+		utils/put_pixel.c \
+		utils/put_line.c \
 		game/game.c \
-		minimap/minimap.c \
-		parsing/clear.c
+		player/player.c \
+		minimap/minimap.c
 
 SRC = srcs/
 DIR = objs_deps/
@@ -45,7 +48,9 @@ $(DIR) :
 	@echo "Wait ..."
 	@mkdir -p objs_deps
 	@mkdir -p objs_deps/parsing
+	@mkdir -p objs_deps/utils
 	@mkdir -p objs_deps/game
+	@mkdir -p objs_deps/player
 	@mkdir -p objs_deps/minimap
 
 clean :

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 16:11:45 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:35:32 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,31 @@ void	minimap(t_mlx *mlx)
 		}
 		i ++;
 		x = 1080;
+		y += CASE_LEN;
+	}
+}
+
+void	map(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+	int	x;
+	int	y;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	while (mlx->data->map[i] != NULL)
+	{
+		j = 0;
+		while (mlx->data->map[i][j] != '\0')
+		{
+			print_cube(mlx, x, y, mlx->data->map[i][j]);
+			j ++;
+			x += CASE_LEN;
+		}
+		i ++;
+		x = 0;
 		y += CASE_LEN;
 	}
 }
