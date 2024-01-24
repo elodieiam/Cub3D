@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 08:38:54 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:52:01 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,30 @@ void	fill_texture2(int value, char *tmp, t_mlx *mlx)
 {
 	if (value == 4)
 	{
-		if (mlx->data->raw.texture_e != NULL)
+		if (mlx->data->textures.raw_e != NULL)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate East texture in file\n");
 		}
-		mlx->data->raw.texture_e = tmp;
+		mlx->data->textures.raw_e = tmp;
 	}
 	else if (value == 5)
 	{
-		if (mlx->data->raw.texture_f != -1)
+		if (mlx->data->textures.texture_f != -1)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate Floor texture in file\n");
 		}
-		mlx->data->raw.texture_f = get_rgb(tmp, mlx);
+		mlx->data->textures.texture_f = get_rgb(tmp, mlx);
 	}
 	else if (value == 6)
 	{
-		if (mlx->data->raw.texture_c != -1)
+		if (mlx->data->textures.texture_c != -1)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate Ceiling texture in file\n");
 		}
-		mlx->data->raw.texture_c = get_rgb(tmp, mlx);
+		mlx->data->textures.texture_c = get_rgb(tmp, mlx);
 	}
 }
 
@@ -99,30 +99,30 @@ void	fill_texture(char *s, int value, t_mlx *mlx)
 		clear_all_failed(mlx, "Malloc Failed !\n");
 	if (value == 1)
 	{
-		if (mlx->data->raw.texture_n != NULL)
+		if (mlx->data->textures.raw_n != NULL)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate North texture in file\n");
 		}
-		mlx->data->raw.texture_n = tmp;
+		mlx->data->textures.raw_n = tmp;
 	}
 	else if (value == 2)
 	{
-		if (mlx->data->raw.texture_s != NULL)
+		if (mlx->data->textures.raw_s != NULL)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate South texture in file\n");
 		}
-		mlx->data->raw.texture_s = tmp;
+		mlx->data->textures.raw_s = tmp;
 	}
 	else if (value == 3)
 	{
-		if (mlx->data->raw.texture_w != NULL)
+		if (mlx->data->textures.raw_w != NULL)
 		{
 			free(tmp);
 			clear_all_failed(mlx, "Duplicate West texture in file\n");
 		}
-		mlx->data->raw.texture_w = tmp;
+		mlx->data->textures.raw_w = tmp;
 	}
 	else
 		fill_texture2(value, tmp, mlx);
@@ -189,9 +189,9 @@ void	take_texture(t_mlx *mlx)
 		else
 			break ;
 	}
-	if (mlx->data->raw.texture_n == NULL || mlx->data->raw.texture_s == NULL
-		|| mlx->data->raw.texture_w == NULL || mlx->data->raw.texture_e == NULL
-		|| mlx->data->raw.texture_f == -1 || mlx->data->raw.texture_c == -1)
+	if (mlx->data->textures.raw_n == NULL || mlx->data->textures.raw_s == NULL
+		|| mlx->data->textures.raw_w == NULL || mlx->data->textures.raw_e == NULL
+		|| mlx->data->textures.texture_f == -1 || mlx->data->textures.texture_c == -1)
 		clear_all_failed(mlx,
 			"Incorrect line or missing textures before map\n");
 	delete_texture_buffer(mlx, tmp);
@@ -201,19 +201,19 @@ void	open_texture(t_mlx *mlx)
 {
 	int	fd;
 
-	fd = open(mlx->data->raw.texture_n, O_RDONLY);
+	fd = open(mlx->data->textures.raw_n, O_RDONLY);
 	if (fd == -1)
 		clear_all_failed(mlx, "Can't read North Texture\n");
 	close(fd);
-	fd = open(mlx->data->raw.texture_s, O_RDONLY);
+	fd = open(mlx->data->textures.raw_s, O_RDONLY);
 	if (fd == -1)
 		clear_all_failed(mlx, "Can't read South Texture\n");
 	close(fd);
-	fd = open(mlx->data->raw.texture_w, O_RDONLY);
+	fd = open(mlx->data->textures.raw_w, O_RDONLY);
 	if (fd == -1)
 		clear_all_failed(mlx, "Can't read West Texture\n");
 	close(fd);
-	fd = open(mlx->data->raw.texture_e, O_RDONLY);
+	fd = open(mlx->data->textures.raw_e, O_RDONLY);
 	if (fd == -1)
 		clear_all_failed(mlx, "Can't read East Texture\n");
 	close(fd);

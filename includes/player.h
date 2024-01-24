@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 10:40:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:31:22 by niromano         ###   ########.fr       */
+/*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
+/*   Updated: 2024/01/24 12:55:21 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#ifndef PLAYER_H
+# define PLAYER_H
 
-void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color)
+# define SPEED 0.05
+
+typedef int t_bool;
+
+typedef struct s_keys
 {
-	char	*dst;
+	t_bool	w;
+	t_bool	s;
+	t_bool	a;
+	t_bool	d;
+	t_bool	left;
+	t_bool	right;
+}	t_keys;
 
-	dst = buf->addr + (y * buf->line_length + x * (buf->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	char	pov;
+	t_keys	keys;
+}	t_player;
+
+#endif

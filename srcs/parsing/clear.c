@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 11:40:13 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:44:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,14 @@ void	clear_data(t_data *data)
 	{
 		if (data->fd != -1)
 			close(data->fd);
-		if (data->raw.texture_n != NULL)
-			free(data->raw.texture_n);
-		if (data->raw.texture_s != NULL)
-			free(data->raw.texture_s);
-		if (data->raw.texture_w != NULL)
-			free(data->raw.texture_w);
-		if (data->raw.texture_e != NULL)
-			free(data->raw.texture_e);
-		if (data->textures.texture_f != NULL)
-			free(data->textures.texture_f);
-		if (data->textures.texture_c != NULL)
-			free(data->textures.texture_c);
+		if (data->textures.raw_n != NULL)
+			free(data->textures.raw_n);
+		if (data->textures.raw_s != NULL)
+			free(data->textures.raw_s);
+		if (data->textures.raw_w != NULL)
+			free(data->textures.raw_w);
+		if (data->textures.raw_e != NULL)
+			free(data->textures.raw_e);
 		if (data->map != NULL)
 			clear_mat(data->map);
 		if (data->buffer != NULL)
@@ -71,7 +67,7 @@ int	clear_all_success(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_s);
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
 	mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
-	mlx_destroy_image(mlx->mlx, mlx->buffer.img);
+	mlx_destroy_image(mlx->mlx, mlx->img_buf.img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
 	free(mlx->mlx);
@@ -90,8 +86,8 @@ void	clear_all_failed(t_mlx *mlx, char *error)
 		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_w);
 	if (mlx->data->textures.texture_e != NULL)
 		mlx_destroy_image(mlx->mlx, mlx->data->textures.texture_e);
-	if (mlx->buffer.img != NULL)
-		mlx_destroy_image(mlx->mlx, mlx->buffer.img);
+	if (mlx->img_buf.img != NULL)
+		mlx_destroy_image(mlx->mlx, mlx->img_buf.img);
 	if (mlx->win != NULL)
 		mlx_destroy_window(mlx->mlx, mlx->win);
 	if (mlx->mlx != NULL)

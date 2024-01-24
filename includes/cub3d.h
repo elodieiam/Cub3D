@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/23 16:30:44 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:00:40 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,48 +25,8 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 
-# define SCREEN_X 1280
-# define SCREEN_Y 720
-
-# define CASE_LEN 30
-# define SPEED 0.05
-
-typedef struct s_raw_textures
-{
-	char	*texture_n;
-	char	*texture_s;
-	char	*texture_w;
-	char	*texture_e;
-	int		texture_f;
-	int		texture_c;
-}	t_raw_textures;
-
-typedef struct s_textures
-{
-	void	*texture_n;
-	void	*texture_s;
-	void	*texture_w;
-	void	*texture_e;
-	char	*texture_f;
-	char	*texture_c;
-}	t_textures;
-
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	char	pov;
-}	t_player;
-
-typedef struct s_data
-{
-	int				fd;
-	t_raw_textures	raw;
-	t_textures		textures;
-	char			**map;
-	t_player		player;
-	t_list			*buffer;
-}	t_data;
+# include "data.h"
+# include "player.h"
 
 typedef struct s_buf
 {
@@ -77,16 +37,22 @@ typedef struct s_buf
 	int		endian;
 }	t_buf;
 
-typedef int t_bool;
+typedef struct s_coord
+{
+	float	sx;
+	float	sy;
+	float	ex;
+	float	ey;
+}	t_coord;
 
 typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
 	t_data	*data;
-	t_buf	buffer;
-	t_bool	hook[6];
-	int		line_coord[4];
+	t_player	player;
+	t_buf	img_buf;
+	t_coord	put_line_coord;
 }	t_mlx;
 
 void	set_mlx_null(t_mlx *mlx);

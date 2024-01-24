@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/23 10:35:32 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:45:19 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	print_cube(t_mlx *mlx, int x, int y, char cube)
 		while (j != CASE_LEN)
 		{
 			if (cube == '0' || cube == 'N' || cube == 'S' || cube == 'W' || cube == 'E')
-				my_mlx_pixel_put(&mlx->buffer, x + i, y + j, 0xFFFFFF);
+				my_mlx_pixel_put(&mlx->img_buf, x + i, y + j, 0xC8C8C8);
 			else if (cube == '1')
-				my_mlx_pixel_put(&mlx->buffer, x + i, y + j, 0x000000);
+				my_mlx_pixel_put(&mlx->img_buf, x + i, y + j, 0x000000);
 			j ++;
 		}
 		i ++;

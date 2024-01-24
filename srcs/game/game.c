@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/23 16:32:12 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:59:55 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	background(t_mlx *mlx)
 		while (y != SCREEN_Y)
 		{
 			if (y < SCREEN_Y / 2)
-				my_mlx_pixel_put(&mlx->buffer, x, y, mlx->data->raw.texture_f);
+				my_mlx_pixel_put(&mlx->img_buf, x, y, mlx->data->textures.texture_f);
 			else
-				my_mlx_pixel_put(&mlx->buffer, x, y, mlx->data->raw.texture_c);
+				my_mlx_pixel_put(&mlx->img_buf, x, y, mlx->data->textures.texture_c);
 			y ++;
 		}
 		x ++;
@@ -41,6 +41,6 @@ int	game(t_mlx *mlx)
 	player(mlx);
 	player_move(mlx);
 	// minimap(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->buffer.img, 0, 0);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img_buf.img, 0, 0);
 	return (0);
 }

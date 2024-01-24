@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 10:40:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:31:22 by niromano         ###   ########.fr       */
+/*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
+/*   Updated: 2024/01/24 13:05:33 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#ifndef DATA_H
+# define DATA_H
 
-void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color)
+# define SCREEN_X 1280
+# define SCREEN_Y 720
+
+# define CASE_LEN 30
+
+typedef struct s_textures
 {
-	char	*dst;
+	char	*raw_n;
+	char	*raw_s;
+	char	*raw_w;
+	char	*raw_e;
+	int		texture_f;
+	int		texture_c;
+	void	*texture_n;
+	void	*texture_s;
+	void	*texture_w;
+	void	*texture_e;
+}	t_textures;
 
-	dst = buf->addr + (y * buf->line_length + x * (buf->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+typedef struct s_data
+{
+	int			fd;
+	char		**map;
+	t_textures	textures;
+	t_list		*buffer;
+}	t_data;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/22 14:43:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:53:34 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,13 +147,13 @@ void	search_player(t_mlx *mlx)
 			if (mlx->data->map[i][j] == 'N' || mlx->data->map[i][j] == 'S'
 				|| mlx->data->map[i][j] == 'W' || mlx->data->map[i][j] == 'E')
 			{
-				if (mlx->data->player.pov != '\0')
+				if (mlx->player.pov != '\0')
 					clear_all_failed(mlx, "More than one spawn point in the map\n");
 				else
 				{
-					mlx->data->player.x = j + 0.5;
-					mlx->data->player.y = i + 0.5;
-					mlx->data->player.pov = mlx->data->map[i][j];
+					mlx->player.x = j + 0.5;
+					mlx->player.y = i + 0.5;
+					mlx->player.pov = mlx->data->map[i][j];
 				}
 			}
 			j ++;
@@ -194,9 +194,9 @@ void	check_border(t_mlx *mlx)
 					|| mlx->data->map[i][j - 1] == '.'
 					|| mlx->data->map[i + 1][j] == '.'
 					|| mlx->data->map[i][j + 1] == '.')
-					{
-						clear_all_failed(mlx, "The map is not closed\n");
-					}
+				{
+					clear_all_failed(mlx, "The map is not closed\n");
+				}
 			}
 			j ++;
 		}
@@ -231,7 +231,7 @@ void	take_map(t_mlx *mlx)
 	clear_list(mlx->data->buffer);
 	mlx->data->buffer = NULL;
 	search_player(mlx);
-	if (mlx->data->player.pov == '\0')
+	if (mlx->player.pov == '\0')
 		clear_all_failed(mlx, "No spawn point in the map\n");
 	check_border(mlx);
 }
