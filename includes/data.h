@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 13:05:33 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:13:35 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_textures
 	char	*raw_s;
 	char	*raw_w;
 	char	*raw_e;
-	int		texture_f;
-	int		texture_c;
+	int		color_f;
+	int		color_c;
 	void	*texture_n;
 	void	*texture_s;
 	void	*texture_w;

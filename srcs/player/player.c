@@ -6,20 +6,20 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:36:46 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:56:30 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:34:10 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	player(t_mlx *mlx)
+void	player(t_mlx *mlx, t_player *player)
 {
 	int	x;
 	int	y;
 	int	i;
 
-	x = mlx->player.x * CASE_LEN;
-	y = mlx->player.y * CASE_LEN;
+	x = player->x * CASE_LEN;
+	y = player->y * CASE_LEN;
 	i = -7;
 	while (i != 8)
 	{
@@ -32,14 +32,14 @@ void	player(t_mlx *mlx)
 	}
 }
 
-void	player_move(t_mlx *mlx)
+void	player_move(t_player *player)
 {
-	if (mlx->player.keys.w == 0 && mlx->player.y > 0.1)
-		mlx->player.y -= SPEED;
-	if (mlx->player.keys.s == 0 && mlx->player.y < (SCREEN_Y / 30) - 0.1)
-		mlx->player.y += SPEED;
-	if (mlx->player.keys.a == 0 && mlx->player.x > 0.1)
-		mlx->player.x -= SPEED;
-	if (mlx->player.keys.d == 0 && mlx->player.x < (SCREEN_X / 30) + 0.6)
-		mlx->player.x += SPEED;
+	if (player->keys.w == 0 && player->y > 0.1)
+		player->y -= SPEED;
+	if (player->keys.s == 0 && player->y < (SCREEN_Y / 30) - 0.1)
+		player->y += SPEED;
+	if (player->keys.a == 0 && player->x > 0.1)
+		player->x -= SPEED;
+	if (player->keys.d == 0 && player->x < (SCREEN_X / 30) + 0.6)
+		player->x += SPEED;
 }

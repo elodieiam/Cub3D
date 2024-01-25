@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:09:11 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/17 08:09:32 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:44:42 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_rgb(char *tmp)
 	return (0);
 }
 
-int	get_rgb(char *tmp, t_mlx *mlx)
+int	get_rgb(char *tmp, t_game *game)
 {
 	int		r;
 	int		g;
@@ -75,16 +75,24 @@ int	get_rgb(char *tmp, t_mlx *mlx)
 	char	**rgb;
 
 	if (check_rgb(tmp) == 1)
-		clear_all_failed(mlx, "RGB code example : \"0,123,255\"\n");
+	{
+		free(tmp);
+		clear_all_failed(game, "RGB code example : \"0,123,255\"\n");
+	}
 	rgb = ft_split(tmp, ',');
 	free(tmp);
 	if (rgb == NULL)
-		clear_all_failed(mlx, "Malloc Failed !\n");
+		clear_all_failed(game, "Malloc Failed !\n");
+	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+	{
+		clear_mat(rgb);
+		clear_all_failed(game, "RGB code example : \"0,123,255\"\n");
+	}
 	r = ft_mini_atoi(rgb[0]);
 	g = ft_mini_atoi(rgb[1]);
 	b = ft_mini_atoi(rgb[2]);
 	clear_mat(rgb);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		clear_all_failed(mlx, "RGB code range : [0,255]\n");
+		clear_all_failed(game, "RGB code range : [0,255]\n");
 	return (r << 16 | g << 8 | b);
 }

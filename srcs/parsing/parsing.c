@@ -6,32 +6,32 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 08:01:59 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:14:32 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	take_buffer(t_mlx *mlx)
+void	take_buffer(t_game *game)
 {
 	t_list	*buf;
 
-	buf = ft_lstnew(get_next_line(mlx->data->fd));
+	buf = ft_lstnew(get_next_line(game->data.fd));
 	if (buf == NULL)
-		clear_all_failed(mlx, "Malloc Failed !\n");
+		clear_all_failed(game, "Malloc Failed !\n");
 	while (buf->content != NULL)
 	{
-		if (mlx->data->buffer == NULL)
-			mlx->data->buffer = buf;
+		if (game->data.buffer == NULL)
+			game->data.buffer = buf;
 		else
-			ft_lstadd_back(&mlx->data->buffer, buf);
-		buf = ft_lstnew(get_next_line(mlx->data->fd));
+			ft_lstadd_back(&game->data.buffer, buf);
+		buf = ft_lstnew(get_next_line(game->data.fd));
 		if (buf == NULL)
-			clear_all_failed(mlx, "Malloc Failed !\n");
+			clear_all_failed(game, "Malloc Failed !\n");
 	}
-	ft_lstadd_back(&mlx->data->buffer, buf);
-	close(mlx->data->fd);
-	mlx->data->fd = -1;
+	ft_lstadd_back(&game->data.buffer, buf);
+	close(game->data.fd);
+	game->data.fd = -1;
 }
 
 int	search_texture(char *s)
@@ -59,76 +59,76 @@ int	search_texture(char *s)
 	return (-1);
 }
 
-void	fill_texture2(int value, char *tmp, t_mlx *mlx)
+void	fill_texture2(int value, char *tmp, t_game *game)
 {
 	if (value == 4)
 	{
-		if (mlx->data->textures.raw_e != NULL)
+		if (game->data.textures.raw_e != NULL)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate East texture in file\n");
+			clear_all_failed(game, "Duplicate East texture in file\n");
 		}
-		mlx->data->textures.raw_e = tmp;
+		game->data.textures.raw_e = tmp;
 	}
 	else if (value == 5)
 	{
-		if (mlx->data->textures.texture_f != -1)
+		if (game->data.textures.color_f != -1)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate Floor texture in file\n");
+			clear_all_failed(game, "Duplicate Floor texture in file\n");
 		}
-		mlx->data->textures.texture_f = get_rgb(tmp, mlx);
+		game->data.textures.color_f = get_rgb(tmp, game);
 	}
 	else if (value == 6)
 	{
-		if (mlx->data->textures.texture_c != -1)
+		if (game->data.textures.color_c != -1)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate Ceiling texture in file\n");
+			clear_all_failed(game, "Duplicate Ceiling texture in file\n");
 		}
-		mlx->data->textures.texture_c = get_rgb(tmp, mlx);
+		game->data.textures.color_c = get_rgb(tmp, game);
 	}
 }
 
-void	fill_texture(char *s, int value, t_mlx *mlx)
+void	fill_texture(char *s, int value, t_game *game)
 {
 	char	*tmp;
 
 	tmp = ft_strtrim(s, " \f\n\r\t\v");
 	if (tmp == NULL)
-		clear_all_failed(mlx, "Malloc Failed !\n");
+		clear_all_failed(game, "Malloc Failed !\n");
 	if (value == 1)
 	{
-		if (mlx->data->textures.raw_n != NULL)
+		if (game->data.textures.raw_n != NULL)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate North texture in file\n");
+			clear_all_failed(game, "Duplicate North texture in file\n");
 		}
-		mlx->data->textures.raw_n = tmp;
+		game->data.textures.raw_n = tmp;
 	}
 	else if (value == 2)
 	{
-		if (mlx->data->textures.raw_s != NULL)
+		if (game->data.textures.raw_s != NULL)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate South texture in file\n");
+			clear_all_failed(game, "Duplicate South texture in file\n");
 		}
-		mlx->data->textures.raw_s = tmp;
+		game->data.textures.raw_s = tmp;
 	}
 	else if (value == 3)
 	{
-		if (mlx->data->textures.raw_w != NULL)
+		if (game->data.textures.raw_w != NULL)
 		{
 			free(tmp);
-			clear_all_failed(mlx, "Duplicate West texture in file\n");
+			clear_all_failed(game, "Duplicate West texture in file\n");
 		}
-		mlx->data->textures.raw_w = tmp;
+		game->data.textures.raw_w = tmp;
 	}
 	else
-		fill_texture2(value, tmp, mlx);
+		fill_texture2(value, tmp, game);
 }
 
-int	check_texture(char *s, t_mlx *mlx)
+int	check_texture(char *s, t_game *game)
 {
 	int	i;
 	int	value;
@@ -149,87 +149,86 @@ int	check_texture(char *s, t_mlx *mlx)
 	if (s[i] == '\0')
 	{
 		if (value == 5 || value == 6)
-			clear_all_failed(mlx, "ID without RGB example : ID \"R,G,B\"\n");
-		clear_all_failed(mlx, "ID without path example : ID \"path\"\n");
+			clear_all_failed(game, "ID without RGB example : ID \"R,G,B\"\n");
+		clear_all_failed(game, "ID without path example : ID \"path\"\n");
 	}
-	fill_texture(&s[i], value, mlx);
+	fill_texture(&s[i], value, game);
 	return (0);
 }
 
-void	delete_texture_buffer(t_mlx *mlx, t_list *tmp)
+void	delete_texture_buffer(t_game *game, t_list *tmp)
 {
 	int	len;
 
 	if (tmp == NULL)
-		clear_all_failed(mlx, "No map in file\n");
-	len = ft_lstsize(mlx->data->buffer) - ft_lstsize(tmp);
+		clear_all_failed(game, "No map in file\n");
+	len = ft_lstsize(game->data.buffer) - ft_lstsize(tmp);
 	while (len != 0)
 	{
-		free(mlx->data->buffer->content);
-		tmp = mlx->data->buffer;
-		mlx->data->buffer = mlx->data->buffer->next;
+		free(game->data.buffer->content);
+		tmp = game->data.buffer;
+		game->data.buffer = game->data.buffer->next;
 		free(tmp);
 		len --;
 	}
 }
 
-void	take_texture(t_mlx *mlx)
+void	take_texture(t_game *game)
 {
 	t_list	*tmp;
 	int		value;
 
-	tmp = mlx->data->buffer;
+	tmp = game->data.buffer;
 	while (tmp != NULL)
 	{
-		value = check_texture(tmp->content, mlx);
+		value = check_texture(tmp->content, game);
 		if (value == 0)
 			tmp = tmp->next;
 		else if (value == -2)
-			clear_all_failed(mlx, "A line is not empty in the file\n");
+			clear_all_failed(game, "A line is not empty in the file\n");
 		else
 			break ;
 	}
-	if (mlx->data->textures.raw_n == NULL || mlx->data->textures.raw_s == NULL
-		|| mlx->data->textures.raw_w == NULL || mlx->data->textures.raw_e == NULL
-		|| mlx->data->textures.texture_f == -1 || mlx->data->textures.texture_c == -1)
-		clear_all_failed(mlx,
-			"Incorrect line or missing textures before map\n");
-	delete_texture_buffer(mlx, tmp);
+	if (game->data.textures.raw_n == NULL || game->data.textures.raw_s == NULL
+		|| game->data.textures.raw_w == NULL || game->data.textures.raw_e == NULL
+		|| game->data.textures.color_f == -1 || game->data.textures.color_c == -1)
+		clear_all_failed(game, "Incorrect line or missing textures before map\n");
+	delete_texture_buffer(game, tmp);
 }
 
-void	open_texture(t_mlx *mlx)
+void	open_texture(t_game *game)
 {
 	int	fd;
 
-	fd = open(mlx->data->textures.raw_n, O_RDONLY);
+	fd = open(game->data.textures.raw_n, O_RDONLY);
 	if (fd == -1)
-		clear_all_failed(mlx, "Can't read North Texture\n");
+		clear_all_failed(game, "Can't read North Texture\n");
 	close(fd);
-	fd = open(mlx->data->textures.raw_s, O_RDONLY);
+	fd = open(game->data.textures.raw_s, O_RDONLY);
 	if (fd == -1)
-		clear_all_failed(mlx, "Can't read South Texture\n");
+		clear_all_failed(game, "Can't read South Texture\n");
 	close(fd);
-	fd = open(mlx->data->textures.raw_w, O_RDONLY);
+	fd = open(game->data.textures.raw_w, O_RDONLY);
 	if (fd == -1)
-		clear_all_failed(mlx, "Can't read West Texture\n");
+		clear_all_failed(game, "Can't read West Texture\n");
 	close(fd);
-	fd = open(mlx->data->textures.raw_e, O_RDONLY);
+	fd = open(game->data.textures.raw_e, O_RDONLY);
 	if (fd == -1)
-		clear_all_failed(mlx, "Can't read East Texture\n");
+		clear_all_failed(game, "Can't read East Texture\n");
 	close(fd);
 }
 
-void	parsing(int argc, char **argv, t_mlx *mlx)
+void	parsing(int argc, char **argv, t_game *game)
 {
 	if (argc != 2)
-		clear_all_failed(mlx, "Bad args example : ./cub3D \"file_path\"\n");
+		clear_all_failed(game, "Bad args example : ./cub3D \"file_path\"\n");
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5) != 0)
-		clear_all_failed(mlx, "Bad extension example : \"*.cub\"\n");
-	mlx->data->fd = open(argv[1], O_RDONLY);
-	if (mlx->data->fd == -1)
-		clear_all_failed(mlx, "Can't open the file\n");
-	take_buffer(mlx);
-	take_texture(mlx);
-	open_texture(mlx);
-	take_map(mlx);
+		clear_all_failed(game, "Bad extension example : \"*.cub\"\n");
+	game->data.fd = open(argv[1], O_RDONLY);
+	if (game->data.fd == -1)
+		clear_all_failed(game, "Can't open the file\n");
+	take_buffer(game);
+	take_texture(game);
+	open_texture(game);
+	take_map(game);
 }

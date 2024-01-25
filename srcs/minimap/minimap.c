@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:45:19 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 10:14:00 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	minimap(t_mlx *mlx)
 	}
 }
 
-void	map(t_mlx *mlx)
+void	map(t_mlx *mlx, char **map)
 {
 	int	i;
 	int	j;
@@ -68,12 +68,12 @@ void	map(t_mlx *mlx)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (mlx->data->map[i] != NULL)
+	while (map[i] != NULL)
 	{
 		j = 0;
-		while (mlx->data->map[i][j] != '\0')
+		while (map[i][j] != '\0')
 		{
-			print_cube(mlx, x, y, mlx->data->map[i][j]);
+			print_cube(mlx, x, y, map[i][j]);
 			j ++;
 			x += CASE_LEN;
 		}

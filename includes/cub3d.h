@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 08:05:17 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:06:38 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ typedef struct s_coord
 
 typedef struct s_mlx
 {
-	void	*mlx;
+	void	*mlx_ptr;
 	void	*win;
-	t_data	*data;
-	t_player	player;
 	t_buf	img_buf;
 	t_coord	put_line_coord;
 }	t_mlx;
@@ -58,7 +56,7 @@ typedef struct s_mlx
 typedef struct s_game
 {
 	t_mlx		mlx;
-	t_data		*data;
+	t_data		data;
 	t_player	player;
 }	t_game;
 
@@ -66,25 +64,25 @@ void	set_game_null(t_game *game);
 void	set_mlx_null(t_mlx *mlx);
 void	set_data_null(t_data *data);
 
-void	parsing(int argc, char **argv, t_mlx *mlx);
-int		get_rgb(char *tmp, t_mlx *mlx);
-void	take_map(t_mlx *mlx);
-void	set_textures(t_mlx *mlx);
+void	parsing(int argc, char **argv, t_game *game);
+int		get_rgb(char *tmp, t_game *game);
+void	take_map(t_game *game);
+void	set_textures(t_game *game);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
 void	put_line(t_mlx *mlx, int color);
 
-int		game_cub(t_mlx *mlx);
+int		game_cub(t_game *game);
 
-void	map(t_mlx *mlx);
+void	map(t_mlx *mlx, char **map);
 void	minimap(t_mlx *mlx);
 
-void	player(t_mlx *mlx);
-void	player_move(t_mlx *mlx);
+void	player(t_mlx *mlx, t_player *player);
+void	player_move(t_player *player);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);
-int		clear_all_success(t_mlx *mlx);
-void	clear_all_failed(t_mlx *mlx, char *error);
+int		clear_all_success(t_game *game);
+void	clear_all_failed(t_game *game, char *error);
 
 #endif
