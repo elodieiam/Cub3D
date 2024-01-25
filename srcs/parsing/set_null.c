@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 11:14:32 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:13:51 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_player_null(t_player *player)
 {
 	player->x = -1;
 	player->y = -1;
-	player->pov = '\0';
+	player->pov = -1;
 	player->keys.w = 1;
 	player->keys.s = 1;
 	player->keys.a = 1;

@@ -37,7 +37,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -sC libft
 	@make -sC minilibx-linux
-	@$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -lXext -lX11
+	@$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJS) ./libft/libft.a ./minilibx-linux/libmlx_Linux.a -lXext -lX11 -lm
 	@echo "Compilation completed"
 
 $(DIR)%.o : $(SRC)%.c | $(DIR)

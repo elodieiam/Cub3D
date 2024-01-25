@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 10:02:37 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:03:25 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,19 @@ char	*fill_map(char *s, int len)
 	return (new_s);
 }
 
+int	take_pov(char c)
+{
+	if (c == 'N')
+		return (0);
+	else if (c == 'S')
+		return (180);
+	else if (c == 'W')
+		return (270);
+	else if (c == 'E')
+		return (90);
+	return (-1);
+}
+
 void	search_player(t_game *game)
 {
 	int	i;
@@ -147,13 +160,13 @@ void	search_player(t_game *game)
 			if (game->data.map[i][j] == 'N' || game->data.map[i][j] == 'S'
 				|| game->data.map[i][j] == 'W' || game->data.map[i][j] == 'E')
 			{
-				if (game->player.pov != '\0')
+				if (game->player.pov != -1)
 					clear_all_failed(game, "More than one spawn point in the map\n");
 				else
 				{
 					game->player.x = j + 0.5;
 					game->player.y = i + 0.5;
-					game->player.pov = game->data.map[i][j];
+					game->player.pov = take_pov(game->data.map[i][j]);
 				}
 			}
 			j ++;
@@ -231,7 +244,7 @@ void	take_map(t_game *game)
 	clear_list(game->data.buffer);
 	game->data.buffer = NULL;
 	search_player(game);
-	if (game->player.pov == '\0')
+	if (game->player.pov == -1)
 		clear_all_failed(game, "No spawn point in the map\n");
 	check_border(game);
 }

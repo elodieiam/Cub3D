@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:55:21 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:15:02 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
-	char	pov;
+	float	pov;
 	t_keys	keys;
 }	t_player;
 

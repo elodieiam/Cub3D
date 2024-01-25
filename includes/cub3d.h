@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 11:06:38 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:45:52 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,8 @@ void	clear_list(t_list *list);
 void	clear_mat(char **mat);
 int		clear_all_success(t_game *game);
 void	clear_all_failed(t_game *game, char *error);
+
+float	positive(t_mlx *mlx, float coord[2], float fraction[2], float remnant);
+float	negative(t_mlx *mlx, float coord[2], float fraction[2], float remnant);
 
 #endif
