@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:56:17 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:59:08 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,30 @@ void	set_data_null(t_data *data)
 	data->textures.texture_e = NULL;
 	data->map = NULL;
 	data->buffer = NULL;
+}
+
+void	set_player_null(t_player *player)
+{
+	player->x = -1;
+	player->y = -1;
+	player->pov = '\0';
+	player->keys.w = 1;
+	player->keys.s = 1;
+	player->keys.a = 1;
+	player->keys.d = 1;
+	player->keys.left = 1;
+	player->keys.right = 1;
+}
+
+void	set_game_null(t_game *game)
+{
+	set_mlx_null(&game->mlx);
+	game->mlx.data = malloc(sizeof(t_data));
+	if (game->mlx.data == NULL)
+	{
+		ft_putstr_fd("Error\nMalloc Failed !\n", 2);
+		exit(EXIT_FAILURE);
+	}
+	set_data_null(game->mlx.data);
+	set_player_null(&game->player);
 }

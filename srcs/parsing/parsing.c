@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 12:52:01 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:01:59 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ void	open_texture(t_mlx *mlx)
 
 void	parsing(int argc, char **argv, t_mlx *mlx)
 {
-	set_data_null(mlx->data);
 	if (argc != 2)
 		clear_all_failed(mlx, "Bad args example : ./cub3D \"file_path\"\n");
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 5) != 0)

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 13:59:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 06:40:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	background(t_mlx *mlx)
 	}
 }
 
-int	game(t_mlx *mlx)
+int	game_cub(t_mlx *mlx)
 {
 	background(mlx);
 	map(mlx);

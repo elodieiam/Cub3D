@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/24 13:00:40 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/25 08:05:17 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ typedef struct s_mlx
 	t_coord	put_line_coord;
 }	t_mlx;
 
+typedef struct s_game
+{
+	t_mlx		mlx;
+	t_data		*data;
+	t_player	player;
+}	t_game;
+
+void	set_game_null(t_game *game);
 void	set_mlx_null(t_mlx *mlx);
 void	set_data_null(t_data *data);
 
@@ -66,7 +74,7 @@ void	set_textures(t_mlx *mlx);
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
 void	put_line(t_mlx *mlx, int color);
 
-int		game(t_mlx *mlx);
+int		game_cub(t_mlx *mlx);
 
 void	map(t_mlx *mlx);
 void	minimap(t_mlx *mlx);
