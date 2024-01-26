@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 11:15:45 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:38:33 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	game_cub(t_game *game)
 	background(&game->mlx, &game->data);
 	map(&game->mlx, game->data.map);
 	player(&game->mlx, &game->player);
-	player_move(&game->player);
+	player_move(&game->player, game->data.map, game->data.map_x, game->data.map_y);
 	// minimap(mlx);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img_buf.img, 0, 0);
 	return (0);

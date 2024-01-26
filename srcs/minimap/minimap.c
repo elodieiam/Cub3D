@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 10:14:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/26 13:48:33 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	print_cube(t_mlx *mlx, int x, int y, char cube)
 	int	j;
 
 	i = 0;
-	while (i != CASE_LEN)
+	while (i != L_BOX)
 	{
 		j = 0;
-		while (j != CASE_LEN)
+		while (j != L_BOX)
 		{
 			if (cube == '0' || cube == 'N' || cube == 'S' || cube == 'W' || cube == 'E')
-				my_mlx_pixel_put(&mlx->img_buf, x + i, y + j, 0xC8C8C8);
+				my_mlx_pixel_put(&mlx->img_buf, x + i, y + j, 0x636363);
 			else if (cube == '1')
 				my_mlx_pixel_put(&mlx->img_buf, x + i, y + j, 0x000000);
 			j ++;
@@ -50,11 +50,11 @@ void	minimap(t_mlx *mlx)
 		{
 			print_cube(mlx, x, y, '0');
 			j ++;
-			x += CASE_LEN;
+			x += L_BOX;
 		}
 		i ++;
 		x = 1080;
-		y += CASE_LEN;
+		y += L_BOX;
 	}
 }
 
@@ -75,10 +75,10 @@ void	map(t_mlx *mlx, char **map)
 		{
 			print_cube(mlx, x, y, map[i][j]);
 			j ++;
-			x += CASE_LEN;
+			x += L_BOX;
 		}
 		i ++;
 		x = 0;
-		y += CASE_LEN;
+		y += L_BOX;
 	}
 }

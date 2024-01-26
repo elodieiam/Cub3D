@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 06:26:01 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 11:14:32 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:44:00 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,4 +231,6 @@ void	parsing(int argc, char **argv, t_game *game)
 	take_texture(game);
 	open_texture(game);
 	take_map(game);
+	game->data.map_x = ft_strlen(game->data.map[0]);
+	game->data.map_y = ft_strlen_mat(game->data.map);
 }
