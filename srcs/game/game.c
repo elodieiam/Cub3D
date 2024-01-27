@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/26 14:38:33 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:58:08 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,45 @@ void	background(t_mlx *mlx, t_data *data)
 	}
 }
 
+// void	mouse(t_mlx *mlx, t_player *player)
+// {
+// 	int	x;
+// 	int	y;
+
+// 	mlx_mouse_get_pos(mlx->mlx_ptr, mlx->win, &x, &y);
+// 	player->pov += (x - SCREEN_X / 2) / 5;
+// 	while (player->pov > 359)
+// 		player->pov -= 360;
+// 	while (player->pov < 0)
+// 		player->pov += 360;
+// 	printf("%f\n", player->pov);
+// 	if (x > (SCREEN_X / 2) + 4 || x < (SCREEN_X / 2) - 4)
+// 		mlx_mouse_move(mlx->mlx_ptr, mlx->win, SCREEN_X / 2, SCREEN_Y / 2);
+// 	if (y > (SCREEN_Y / 2) || y < (SCREEN_Y / 2))
+// 		mlx_mouse_move(mlx->mlx_ptr, mlx->win, x, SCREEN_Y / 2);
+// }
+
+void	mouse(t_mlx *mlx, t_player *player)
+{
+	int	x;
+	int	y;
+
+	mlx_mouse_get_pos(mlx->mlx_ptr, mlx->win, &x, &y);
+	if (x == 0)
+		x = 360;
+	while (x > 360)
+		x -= 360;
+	player->pov = x;
+	mlx_mouse_move(mlx->mlx_ptr, mlx->win, x, 0);
+}
+
 int	game_cub(t_game *game)
 {
 	background(&game->mlx, &game->data);
 	map(&game->mlx, game->data.map);
 	player(&game->mlx, &game->player);
-	player_move(&game->player, game->data.map, game->data.map_x, game->data.map_y);
+	player_move(&game->mlx, &game->player, game->data.map);
+	mouse(&game->mlx, &game->player);
 	// minimap(mlx);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img_buf.img, 0, 0);
 	return (0);

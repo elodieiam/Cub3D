@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:36:46 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/26 16:10:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:54:22 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ void	player(t_mlx *mlx, t_player *player)
 
 int	collision(t_player *player, char **map, int map_x, int map_y)
 {
-	printf("%f %f\n", (sin_pov(player) * SPEED), (cos_pov(player) * SPEED));
+	(void)player;
+	(void)map;
+	(void)map_x;
+	(void)map_y;
+	// printf("%f %f\n", (sin_pov(player) * SPEED), (cos_pov(player) * SPEED));
 	if (map[map_y - 1][map_x - 1])
 	{
 		
@@ -49,7 +53,7 @@ int	collision(t_player *player, char **map, int map_x, int map_y)
 	return (0);
 }
 
-void	player_move(t_player *player, char **map, int map_x, int map_y)
+void	player_move(t_mlx *mlx, t_player *player, char **map)
 {
 	if (player->keys.w == 0)
 	{
@@ -84,12 +88,13 @@ void	player_move(t_player *player, char **map, int map_x, int map_y)
 		if (player->pov == 0)
 			player->pov = 360;
 		player->pov -= 1;
+		mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov, 0);
 	}
 	if (player->keys.right == 0)
 	{
 		if (player->pov == 360)
 			player->pov = 0;
 		player->pov += 1;
+		mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov, 0);
 	}
-	collision(player, map, map_x, map_y);
 }
