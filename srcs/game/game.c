@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/27 13:58:08 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/27 14:03:07 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,6 @@ void	background(t_mlx *mlx, t_data *data)
 		x ++;
 	}
 }
-
-// void	mouse(t_mlx *mlx, t_player *player)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	mlx_mouse_get_pos(mlx->mlx_ptr, mlx->win, &x, &y);
-// 	player->pov += (x - SCREEN_X / 2) / 5;
-// 	while (player->pov > 359)
-// 		player->pov -= 360;
-// 	while (player->pov < 0)
-// 		player->pov += 360;
-// 	printf("%f\n", player->pov);
-// 	if (x > (SCREEN_X / 2) + 4 || x < (SCREEN_X / 2) - 4)
-// 		mlx_mouse_move(mlx->mlx_ptr, mlx->win, SCREEN_X / 2, SCREEN_Y / 2);
-// 	if (y > (SCREEN_Y / 2) || y < (SCREEN_Y / 2))
-// 		mlx_mouse_move(mlx->mlx_ptr, mlx->win, x, SCREEN_Y / 2);
-// }
 
 void	mouse(t_mlx *mlx, t_player *player)
 {
