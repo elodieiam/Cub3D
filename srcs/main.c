@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/27 11:50:46 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:49:04 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,15 @@ void	set_mlx(t_game *game)
 	game->mlx.mlx_ptr = mlx_init();
 	if (game->mlx.mlx_ptr == NULL)
 		clear_all_failed(game, "Init of MLX failed\n");
-	game->mlx.win = mlx_new_window(game->mlx.mlx_ptr, SCREEN_X, SCREEN_Y, "Cub3D");
+	game->mlx.win = mlx_new_window(game->mlx.mlx_ptr,
+			SCREEN_X, SCREEN_Y, "Cub3D");
 	if (game->mlx.win == NULL)
 		clear_all_failed(game, "Creation of window failed\n");
-	game->mlx.img_buf.img = mlx_new_image(game->mlx.mlx_ptr, SCREEN_X, SCREEN_Y);
-	game->mlx.img_buf.addr = mlx_get_data_addr(game->mlx.img_buf.img, &game->mlx.img_buf.bits_per_pixel, &game->mlx.img_buf.line_length, &game->mlx.img_buf.endian);
+	game->mlx.img_buf.img = mlx_new_image(game->mlx.mlx_ptr,
+			SCREEN_X, SCREEN_Y);
+	game->mlx.img_buf.addr = mlx_get_data_addr(game->mlx.img_buf.img,
+			&game->mlx.img_buf.bits_per_pixel, &game->mlx.img_buf.line_length,
+			&game->mlx.img_buf.endian);
 	set_textures(game);
 }
 

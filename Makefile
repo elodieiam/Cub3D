@@ -14,7 +14,7 @@ SOURCES = main.c \
 		utils/put_line.c \
 		game/game.c \
 		game/background.c \
-		game/map.c \
+		game/minimap.c \
 		player/move_cam.c \
 		player/move_player.c \
 		player/collision.c \

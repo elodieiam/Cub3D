@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:09:11 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/25 11:44:42 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:55:40 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ int	ft_mini_atoi(const char *nptr)
 	return (-1);
 }
 
+int	check_double_comma(int comma)
+{
+	if (comma != 2)
+		return (1);
+	return (0);
+}
+
 int	check_rgb(char *tmp)
 {
 	int	i;
@@ -62,9 +69,13 @@ int	check_rgb(char *tmp)
 			return (1);
 		i ++;
 	}
-	if (comma != 2)
-		return (1);
-	return (0);
+	return (check_double_comma(comma));
+}
+
+void	rgb_failed(t_game *game, char *tmp)
+{
+	free(tmp);
+	clear_all_failed(game, "RGB code example : \"0,123,255\"\n");
 }
 
 int	get_rgb(char *tmp, t_game *game)
@@ -75,10 +86,7 @@ int	get_rgb(char *tmp, t_game *game)
 	char	**rgb;
 
 	if (check_rgb(tmp) == 1)
-	{
-		free(tmp);
-		clear_all_failed(game, "RGB code example : \"0,123,255\"\n");
-	}
+		rgb_failed(game, tmp);
 	rgb = ft_split(tmp, ',');
 	free(tmp);
 	if (rgb == NULL)

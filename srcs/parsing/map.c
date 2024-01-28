@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 12:48:35 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/26 14:42:44 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:00:01 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	search_player(t_game *game)
 				|| game->data.map[i][j] == 'W' || game->data.map[i][j] == 'E')
 			{
 				if (game->player.pov != -1)
-					clear_all_failed(game, "More than one spawn point in the map\n");
+					clear_all_failed(game, "More than one spawn in the map\n");
 				else
 				{
 					game->player.x = j + 0.5;
@@ -197,7 +197,8 @@ void	check_border(t_game *game)
 		while (game->data.map[i][j] != '\0')
 		{
 			if ((i == 0 || j == 0 || i == ft_strlen_mat(game->data.map) - 1
-					|| j == (int)ft_strlen(game->data.map[i]) - 1) && game->data.map[i][j] == '0')
+					|| j == (int)ft_strlen(game->data.map[i]) - 1)
+				&& game->data.map[i][j] == '0')
 				clear_all_failed(game, "The map is not closed\n");
 			else if (game->data.map[i][j] == '0' || game->data.map[i][j] == 'N'
 				|| game->data.map[i][j] == 'S' || game->data.map[i][j] == 'W'
