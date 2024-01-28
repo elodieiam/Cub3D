@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:36:46 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/28 12:31:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:29:26 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	player(t_mlx *mlx, t_player *player)
 
 void	player_move(t_mlx *mlx, t_data *data, t_player *player)
 {
-	printf("%f %f\n", player->x, player->y);
 	if (player->keys.w == 0)
 	{
 		if (player->x + (sin_pov(player) * SPEED) < data->map_x && player->x + (sin_pov(player) * SPEED) > 0 && collision(data, player, 'w', 'x') == 0)

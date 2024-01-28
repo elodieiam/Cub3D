@@ -15,6 +15,7 @@ SOURCES = main.c \
 		game/game.c \
 		player/player.c \
 		player/collision.c \
+		player/dir_collision.c \
 		utils/trigonometry.c \
 		minimap/minimap.c
 

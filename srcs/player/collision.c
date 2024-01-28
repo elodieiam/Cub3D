@@ -6,121 +6,97 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:01:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/28 12:24:58 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:47:41 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	north_west(t_data *data, t_player *player, int axis)
+static int	collision_w(t_data *data, t_player *player, char axis)
 {
-	printf("NW\n");
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x - 1] == '1' && player->x < (int)player->x + 0.1)
-		return (1);
-	if (axis == 'y' && data->map[(int)player->y - 1][(int)player->x] == '1' && player->y < (int)player->y + 0.1)
-		return (1);
+	if (sin_pov(player) > 0)
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, NE));
+		else
+			return (dir_collision(data, player, axis, SE));
+	}
+	else
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, NW));
+		else
+			return (dir_collision(data, player, axis, SW));
+	}
 	return (0);
 }
 
-static int	north_east(t_data *data, t_player *player, int axis)
+static int	collision_s(t_data *data, t_player *player, char axis)
 {
-	printf("NE\n");
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x + 1] == '1' && player->x > (int)player->x + 0.9)
-		return (1);
-	if (axis == 'y' && data->map[(int)player->y - 1][(int)player->x] == '1' && player->y < (int)player->y + 0.1)
-		return (1);
+	if (sin_pov(player) > 0)
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, SW));
+		else
+			return (dir_collision(data, player, axis, NW));
+	}
+	else
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, SE));
+		else
+			return (dir_collision(data, player, axis, NE));
+	}
 	return (0);
 }
 
-static int	south_west(t_data *data, t_player *player, int axis)
+static int	collision_a(t_data *data, t_player *player, char axis)
 {
-	printf("SW\n");
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x - 1] == '1' && player->x < (int)player->x + 0.1)
-		return (1);
-	if (axis == 'y' && data->map[(int)player->y + 1][(int)player->x] == '1' && player->y > (int)player->y + 0.9)
-		return (1);
+	if (sin_pov(player) > 0)
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, NW));
+		else
+			return (dir_collision(data, player, axis, NE));
+	}
+	else
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, SW));
+		else
+			return (dir_collision(data, player, axis, SE));
+	}
 	return (0);
 }
 
-static int	south_east(t_data *data, t_player *player, int axis)
+static int	collision_d(t_data *data, t_player *player, char axis)
 {
-	printf("SE\n");
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x + 1] == '1' && player->x > (int)player->x + 0.9)
-		return (1);
-	if (axis == 'y' && data->map[(int)player->y + 1][(int)player->x] == '1' && player->y > (int)player->y + 0.9)
-		return (1);
+	if (sin_pov(player) > 0)
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, SE));
+		else
+			return (dir_collision(data, player, axis, SW));
+	}
+	else
+	{
+		if (cos_pov(player) > 0)
+			return (dir_collision(data, player, axis, NE));
+		else
+			return (dir_collision(data, player, axis, NW));
+	}
 	return (0);
 }
 
 int	collision(t_data *data, t_player *player, char key, char axis)
 {
 	if (key == 'w')
-	{
-		if (sin_pov(player) > 0)
-		{
-			if (cos_pov(player) > 0)
-				return (north_east(data, player, axis));
-			else
-				return (south_east(data, player, axis));
-		}
-		else
-		{
-			if (cos_pov(player) > 0)
-				return (north_west(data, player, axis));
-			else
-				return (south_west(data, player, axis));
-		}
-	}
+		return (collision_w(data, player, axis));
 	if (key == 's')
-	{
-		if (sin_pov(player) > 0)
-		{
-			if (cos_pov(player) > 0)
-				return (south_west(data, player, axis));
-			else
-				return (north_west(data, player, axis));
-		}
-		else
-		{
-			if (cos_pov(player) > 0)
-				return (south_east(data, player, axis));
-			else
-				return (north_east(data, player, axis));
-		}
-	}
+		return (collision_s(data, player, axis));
 	if (key == 'a')
-	{
-		if (sin_pov(player) > 0)
-		{
-			if (cos_pov(player) > 0)
-				return (north_west(data, player, axis));
-			else
-				return (north_east(data, player, axis));
-		}
-		else
-		{
-			if (cos_pov(player) > 0)
-				return (south_west(data, player, axis));
-			else
-				return (south_east(data, player, axis));
-		}
-	}
+		return (collision_a(data, player, axis));
 	if (key == 'd')
-	{
-		if (sin_pov(player) > 0)
-		{
-			if (cos_pov(player) > 0)
-				return (south_east(data, player, axis));
-			else
-				return (south_west(data, player, axis));
-		}
-		else
-		{
-			if (cos_pov(player) > 0)
-				return (north_east(data, player, axis));
-			else
-				return (north_west(data, player, axis));
-		}
-	}
+		return (collision_d(data, player, axis));
 	return (0);
 }
