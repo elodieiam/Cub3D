@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/28 14:58:05 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:25:23 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,11 @@ float	sin_pov(t_player *player);
 int		game_cub(t_game *game);
 
 void	background(t_mlx *mlx, t_data *data);
-
-void	map(t_mlx *mlx, char **map);
-void	minimap(t_mlx *mlx);
-
-void	player(t_mlx *mlx, t_player *player);
-void	mouse(t_mlx *mlx, t_player *player);
-void	player_move(t_mlx *mlx, t_data *data, t_player *player);
+void	minimap(t_mlx *mlx, t_player *player, char **map);
+void	move_player(t_data *data, t_player *player);
 int		collision(t_data *data, t_player *player, char key, char axis);
 int		dir_collision(t_data *data, t_player *player, int axis, int dir);
+void	move_cam(t_mlx *mlx, t_player *player);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);

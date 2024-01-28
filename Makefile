@@ -15,8 +15,8 @@ SOURCES = main.c \
 		game/game.c \
 		game/background.c \
 		game/map.c \
-		player/player.c \
-		player/mouse.c \
+		player/move_cam.c \
+		player/move_player.c \
 		player/collision.c \
 		player/dir_collision.c \
 		utils/trigonometry.c
