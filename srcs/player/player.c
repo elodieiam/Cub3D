@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:36:46 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/27 13:54:22 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:31:55 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	icon_player(t_mlx *mlx, t_player *player, int x, int y)
 {
-	mlx->put_line_coord.sx = x + (int)(sin_pov(player) * (L_BOX / 4));
-	mlx->put_line_coord.sy = y - (int)(cos_pov(player) * (L_BOX / 4));
+	mlx->put_line_coord.sx = x + (int)(sin_pov(player) * (L_BOX / 2));
+	mlx->put_line_coord.sy = y - (int)(cos_pov(player) * (L_BOX / 2));
 	mlx->put_line_coord.ex = x - (int)((sin_pov(player) * (L_BOX / 2)) - (cos_pov(player) * (L_BOX / 4)));
 	mlx->put_line_coord.ey = y + (int)((cos_pov(player) * (L_BOX / 2)) + (sin_pov(player) * (L_BOX / 4)));
 	put_line(mlx, 0xFFF000);
@@ -39,48 +39,35 @@ void	player(t_mlx *mlx, t_player *player)
 	icon_player(mlx, player, x, y);
 }
 
-int	collision(t_player *player, char **map, int map_x, int map_y)
+void	player_move(t_mlx *mlx, t_data *data, t_player *player)
 {
-	(void)player;
-	(void)map;
-	(void)map_x;
-	(void)map_y;
-	// printf("%f %f\n", (sin_pov(player) * SPEED), (cos_pov(player) * SPEED));
-	if (map[map_y - 1][map_x - 1])
-	{
-		
-	}
-	return (0);
-}
-
-void	player_move(t_mlx *mlx, t_player *player, char **map)
-{
+	printf("%f %f\n", player->x, player->y);
 	if (player->keys.w == 0)
 	{
-		if (player->x + (sin_pov(player) * SPEED) < ft_strlen(map[0]) && player->x + (sin_pov(player) * SPEED) > 0)
+		if (player->x + (sin_pov(player) * SPEED) < data->map_x && player->x + (sin_pov(player) * SPEED) > 0 && collision(data, player, 'w', 'x') == 0)
 			player->x += (sin_pov(player) * SPEED);
-		if (player->y - (cos_pov(player) * SPEED) < ft_strlen_mat(map) && player->y - (cos_pov(player) * SPEED) > 0)
+		if (player->y - (cos_pov(player) * SPEED) < data->map_y && player->y - (cos_pov(player) * SPEED) > 0 && collision(data, player, 'w', 'y') == 0)
 			player->y -= (cos_pov(player) * SPEED);
 	}
 	if (player->keys.s == 0)
 	{
-		if (player->x - (sin_pov(player) * SPEED) < ft_strlen(map[0]) && player->x - (sin_pov(player) * SPEED) > 0)
+		if (player->x - (sin_pov(player) * SPEED) < data->map_x && player->x - (sin_pov(player) * SPEED) > 0 && collision(data, player, 's', 'x') == 0)
 			player->x -= (sin_pov(player) * SPEED);
-		if (player->y + (cos_pov(player) * SPEED) < ft_strlen_mat(map) && player->y + (cos_pov(player) * SPEED) > 0)
+		if (player->y + (cos_pov(player) * SPEED) < data->map_y && player->y + (cos_pov(player) * SPEED) > 0 && collision(data, player, 's', 'y') == 0)
 			player->y += (cos_pov(player) * SPEED);
 	}
 	if (player->keys.a == 0)
 	{
-		if (player->x - (cos_pov(player) * SPEED) < ft_strlen(map[0]) && player->x - (cos_pov(player) * SPEED) > 0)
+		if (player->x - (cos_pov(player) * SPEED) < data->map_x && player->x - (cos_pov(player) * SPEED) > 0 && collision(data, player, 'a', 'x') == 0)
 			player->x -= (cos_pov(player) * SPEED);
-		if (player->y - (sin_pov(player) * SPEED) < ft_strlen_mat(map) && player->y - (sin_pov(player) * SPEED) > 0)
+		if (player->y - (sin_pov(player) * SPEED) < data->map_y && player->y - (sin_pov(player) * SPEED) > 0 && collision(data, player, 'a', 'y') == 0)
 			player->y -= (sin_pov(player) * SPEED);
 	}
 	if (player->keys.d == 0)
 	{
-		if (player->x + (cos_pov(player) * SPEED) < ft_strlen(map[0]) && player->x + (cos_pov(player) * SPEED) > 0)
+		if (player->x + (cos_pov(player) * SPEED) < data->map_x && player->x + (cos_pov(player) * SPEED) > 0 && collision(data, player, 'd', 'x') == 0)
 			player->x += (cos_pov(player) * SPEED);
-		if (player->y + (sin_pov(player) * SPEED) < ft_strlen_mat(map) && player->y + (sin_pov(player) * SPEED) > 0)
+		if (player->y + (sin_pov(player) * SPEED) < data->map_y && player->y + (sin_pov(player) * SPEED) > 0 && collision(data, player, 'd', 'y') == 0)
 			player->y += (sin_pov(player) * SPEED);
 	}
 	if (player->keys.left == 0)

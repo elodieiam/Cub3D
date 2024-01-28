@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/27 14:03:07 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:35:54 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	mouse(t_mlx *mlx, t_player *player)
 	while (x > 360)
 		x -= 360;
 	player->pov = x;
-	mlx_mouse_move(mlx->mlx_ptr, mlx->win, x, 0);
+	mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov, 0);
 }
 
 int	game_cub(t_game *game)
@@ -53,7 +53,7 @@ int	game_cub(t_game *game)
 	background(&game->mlx, &game->data);
 	map(&game->mlx, game->data.map);
 	player(&game->mlx, &game->player);
-	player_move(&game->mlx, &game->player, game->data.map);
+	player_move(&game->mlx, &game->data, &game->player);
 	mouse(&game->mlx, &game->player);
 	// minimap(mlx);
 	mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win, game->mlx.img_buf.img, 0, 0);
