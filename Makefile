@@ -8,6 +8,10 @@ SOURCES = main.c \
 		parsing/set_null.c \
 		parsing/rgb.c \
 		parsing/map.c \
+		parsing/check_map.c \
+		parsing/fill_map.c \
+		parsing/search_player.c \
+		parsing/check_border.c \
 		parsing/set_textures.c \
 		parsing/clear.c \
 		utils/put_pixel.c \
