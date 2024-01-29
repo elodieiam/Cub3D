@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 08:57:44 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:19:25 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ float	cos_pov(t_player *player);
 float	sin_pov(t_player *player);
 
 int		game_cub(t_game *game);
+
+int		get_hook(int key, t_game *game);
+int		let_hook(int key, t_player *player);
 
 void	background(t_mlx *mlx, t_data *data);
 void	minimap(t_mlx *mlx, t_player *player, char **map);

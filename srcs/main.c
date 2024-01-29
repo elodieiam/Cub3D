@@ -6,47 +6,11 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/28 19:49:04 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 11:19:00 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-int	get_hook(int key, t_game *game)
-{
-	if (key == XK_Escape)
-		clear_all_success(game);
-	else if (key == 'w')
-		game->player.keys.w = 0;
-	else if (key == 's')
-		game->player.keys.s = 0;
-	else if (key == 'a')
-		game->player.keys.a = 0;
-	else if (key == 'd')
-		game->player.keys.d = 0;
-	else if (key == XK_Left)
-		game->player.keys.left = 0;
-	else if (key == XK_Right)
-		game->player.keys.right = 0;
-	return (0);
-}
-
-int	input(int key, t_player *player)
-{
-	if (key == 'w')
-		player->keys.w = 1;
-	else if (key == 's')
-		player->keys.s = 1;
-	else if (key == 'a')
-		player->keys.a = 1;
-	else if (key == 'd')
-		player->keys.d = 1;
-	else if (key == XK_Left)
-		player->keys.left = 1;
-	else if (key == XK_Right)
-		player->keys.right = 1;
-	return (0);
-}
 
 void	set_mlx(t_game *game)
 {
@@ -70,7 +34,7 @@ void	set_game_cub(t_game *game)
 	mlx_mouse_move(game->mlx.mlx_ptr, game->mlx.win, game->player.pov, 0);
 	mlx_hook(game->mlx.win, 17, 0, clear_all_success, game);
 	mlx_hook(game->mlx.win, KeyPress, KeyPressMask, get_hook, game);
-	mlx_hook(game->mlx.win, KeyRelease, KeyReleaseMask, input, &game->player);
+	mlx_hook(game->mlx.win, KeyRelease, KeyReleaseMask, let_hook, &game->player);
 	mlx_loop_hook(game->mlx.mlx_ptr, game_cub, game);
 	mlx_loop(game->mlx.mlx_ptr);
 }
