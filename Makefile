@@ -7,7 +7,9 @@ SOURCES = main.c \
 		parsing/parsing.c \
 		parsing/set_null.c \
 		parsing/rgb.c \
-		parsing/map.c \
+		parsing/take_texture.c \
+		parsing/fill_texture.c \
+		parsing/take_map.c \
 		parsing/check_map.c \
 		parsing/fill_map.c \
 		parsing/search_player.c \
