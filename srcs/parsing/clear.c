@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/26 20:22:25 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:27:06 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	clear_all_success(t_game *game)
 	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_w);
 	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e);
 	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_buf.img);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_map.img);
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
 	mlx_destroy_display(game->mlx.mlx_ptr);
 	free(game->mlx.mlx_ptr);
@@ -84,6 +85,8 @@ void	clear_all_failed(t_game *game, char *error)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e);
 	if (game->mlx.img_buf.img != NULL)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_buf.img);
+	if (game->mlx.img_map.img != NULL)
+	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_map.img);
 	if (game->mlx.win != NULL)
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
 	if (game->mlx.mlx_ptr != NULL)

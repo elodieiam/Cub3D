@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:39:39 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/28 19:46:56 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:30:12 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ float	negative(t_mlx *mlx, float coord[2], float fraction[2], float remnant)
 	return (remnant);
 }
 
-void	put_line(t_mlx *mlx, int color)
+void	put_line(t_mlx *mlx, t_buf *mlx_img, int color)
 {
 	float	coord[2];
 	float	fraction[2];
@@ -69,7 +69,7 @@ void	put_line(t_mlx *mlx, int color)
 	while (coord[0] != mlx->put_line_coord.ex
 		|| coord[1] != mlx->put_line_coord.ey)
 	{
-		my_mlx_pixel_put(&mlx->img_buf, coord[0], coord[1], color);
+		my_mlx_pixel_put(mlx_img, coord[0], coord[1], color);
 		if (fraction[0] > fraction[1])
 			remnant = positive(mlx, coord, fraction, remnant);
 		else

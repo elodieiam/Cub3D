@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 11:19:25 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:21:07 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*win;
 	t_buf	img_buf;
+	t_buf	img_map;
 	t_coord	put_line_coord;
 }	t_mlx;
 
@@ -77,7 +78,8 @@ void	check_border(t_game *game);
 void	set_textures(t_game *game);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);
-void	put_line(t_mlx *mlx, int color);
+int		my_mlx_pixel_get(t_buf *buf, int x, int y);
+void	put_line(t_mlx *mlx, t_buf *mlx_img, int color);
 float	cos_pov(t_player *player);
 float	sin_pov(t_player *player);
 

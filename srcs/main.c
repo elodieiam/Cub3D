@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 11:19:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:25:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	set_mlx(t_game *game)
 	game->mlx.img_buf.addr = mlx_get_data_addr(game->mlx.img_buf.img,
 			&game->mlx.img_buf.bits_per_pixel, &game->mlx.img_buf.line_length,
 			&game->mlx.img_buf.endian);
+	game->mlx.img_map.img = mlx_new_image(game->mlx.mlx_ptr,
+			SCREEN_X, SCREEN_Y);
+	game->mlx.img_map.addr = mlx_get_data_addr(game->mlx.img_map.img,
+			&game->mlx.img_map.bits_per_pixel, &game->mlx.img_map.line_length,
+			&game->mlx.img_map.endian);
 	set_textures(game);
 }
 
