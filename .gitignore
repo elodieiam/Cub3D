@@ -1,9 +1,11 @@
 *.o
 *.d
 cub3D
+cub3D_bonus
 .vscode
 libft.a
 objs_deps
+objs_deps_bonus
 minilibx-linux/libmlx.a
 minilibx-linux/libmlx_Linux.a
 minilibx-linux/test/mlx-test
