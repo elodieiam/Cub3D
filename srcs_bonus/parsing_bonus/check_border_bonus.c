@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:27:10 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:31:10 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:24:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	check_border_line(t_game *game, int i)
 			clear_all_failed(game, "The map is not closed\n");
 		else if (game->data.map[i][j] == '0' || game->data.map[i][j] == 'N'
 			|| game->data.map[i][j] == 'S' || game->data.map[i][j] == 'W'
-			|| game->data.map[i][j] == 'E')
+			|| game->data.map[i][j] == 'E' || game->data.map[i][j] == 'O'
+			|| game->data.map[i][j] == 'C')
 		{
 			if (game->data.map[i - 1][j] == '.'
 				|| game->data.map[i][j - 1] == '.'

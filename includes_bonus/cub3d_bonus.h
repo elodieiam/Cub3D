@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 13:48:40 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:30:31 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	check_map(t_game *game);
 char	*fill_map(char *s, int len);
 void	search_player(t_game *game);
 void	check_border(t_game *game);
+void	check_door(t_game *game);
 void	set_textures(t_game *game);
 
 void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color);

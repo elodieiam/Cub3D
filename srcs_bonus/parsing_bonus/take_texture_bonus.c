@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:56:05 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:32:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:59:28 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ int	search_texture(char *s)
 	else if (ft_strncmp(s, "C", 1) == 0 && (s[1] == ' '
 			|| (s[2] >= 9 && s[2] <= 13)))
 		return (6);
+	else if (ft_strncmp(s, "DO", 2) == 0 && (s[2] == ' '
+			|| (s[2] >= 9 && s[2] <= 13)))
+		return (7);
 	return (-1);
 }
 
@@ -102,6 +105,10 @@ void	open_texture(t_game *game)
 	if (fd == -1)
 		clear_all_failed(game, "Can't read East Texture\n");
 	close(fd);
+	fd = open(game->data.textures.raw_d, O_RDONLY);
+	if (fd == -1)
+		clear_all_failed(game, "Can't read Door Texture\n");
+	close(fd);
 }
 
 void	take_texture(t_game *game)
@@ -124,6 +131,7 @@ void	take_texture(t_game *game)
 		|| game->data.textures.raw_s == NULL
 		|| game->data.textures.raw_w == NULL
 		|| game->data.textures.raw_e == NULL
+		|| game->data.textures.raw_d == NULL
 		|| game->data.textures.color_f == -1
 		|| game->data.textures.color_c == -1)
 		clear_all_failed(game,

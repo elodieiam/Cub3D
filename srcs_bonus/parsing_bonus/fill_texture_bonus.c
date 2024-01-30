@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:55:47 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:31:37 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:06:29 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,19 @@ static void	fill_texture_fc(int value, char *tmp, t_game *game)
 	}
 }
 
+static void	fill_texture_do(int value, char *tmp, t_game *game)
+{
+	if (value == 7)
+	{
+		if (game->data.textures.raw_d != NULL)
+		{
+			free(tmp);
+			clear_all_failed(game, "Duplicate Door texture in file\n");
+		}
+		game->data.textures.raw_d = tmp;
+	}
+}
+
 void	fill_texture(char *s, int value, t_game *game)
 {
 	char	*tmp;
@@ -91,4 +104,6 @@ void	fill_texture(char *s, int value, t_game *game)
 		fill_texture_we(value, tmp, game);
 	else if (value == 5 || value == 6)
 		fill_texture_fc(value, tmp, game);
+	else if (value == 7)
+		fill_texture_do(value, tmp, game);
 }

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:00:11 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:32:08 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:29:18 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	clear_raw(t_data *data)
 	data->textures.raw_w = NULL;
 	free(data->textures.raw_e);
 	data->textures.raw_e = NULL;
+	free(data->textures.raw_d);
+	data->textures.raw_d = NULL;
 }
 
 void	set_textures(t_game *game)
@@ -45,5 +47,9 @@ void	set_textures(t_game *game)
 			game->data.textures.raw_e, &x, &y);
 	if (game->data.textures.texture_e == NULL)
 		clear_all_failed(game, "East texture is not a texture\n");
+	game->data.textures.texture_d = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
+			game->data.textures.raw_d, &x, &y);
+	if (game->data.textures.texture_d == NULL)
+		clear_all_failed(game, "Door texture is not a texture\n");
 	clear_raw(&game->data);
 }

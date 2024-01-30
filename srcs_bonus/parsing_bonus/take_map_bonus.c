@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:23:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:32:14 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:15:36 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	take_map2(t_game *game)
 	if (game->player.pov == -1)
 		clear_all_failed(game, "No spawn point in the map\n");
 	check_border(game);
+	check_door(game);
 }
 
 void	take_map(t_game *game)

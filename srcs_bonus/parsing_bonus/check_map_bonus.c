@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:21:07 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:31:17 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:26:29 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	verify_character(t_game *game)
 				&& tmp->content[i] != 'N' && tmp->content[i] != 'S'
 				&& tmp->content[i] != 'W' && tmp->content[i] != 'E'
 				&& tmp->content[i] != ' '
+				&& tmp->content[i] != 'O' && tmp->content[i] != 'C'
 				&& !(tmp->content[i] >= 9 && tmp->content[i] <= 13))
 			{
 				clear_all_failed(game, "Invalid character in the map\n");

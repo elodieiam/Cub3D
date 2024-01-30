@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 14:32:21 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:32:38 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:41:47 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static int	dir_north_west(t_data *data, t_player *player, int axis)
 {
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x - 1] == '1'
+	if (axis == 'x' && (data->map[(int)player->y][(int)player->x - 1] == '1'
+		|| data->map[(int)player->y][(int)player->x - 1] == 'C')
 		&& player->x < (int)player->x + 0.1)
 		return (1);
-	if (axis == 'y' && data->map[(int)player->y - 1][(int)player->x] == '1'
+	if (axis == 'y' && (data->map[(int)player->y - 1][(int)player->x] == '1'
+		|| data->map[(int)player->y - 1][(int)player->x] == 'C')
 		&& player->y < (int)player->y + 0.1)
 		return (1);
 	return (0);
@@ -25,10 +27,12 @@ static int	dir_north_west(t_data *data, t_player *player, int axis)
 
 static int	dir_north_east(t_data *data, t_player *player, int axis)
 {
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x + 1] == '1'
+	if (axis == 'x' && (data->map[(int)player->y][(int)player->x + 1] == '1'
+		|| data->map[(int)player->y][(int)player->x + 1] == 'C')
 		&& player->x > (int)player->x + 0.9)
 		return (1);
-	if (axis == 'y' && data->map[(int)player->y - 1][(int)player->x] == '1'
+	if (axis == 'y' && (data->map[(int)player->y - 1][(int)player->x] == '1'
+		|| data->map[(int)player->y - 1][(int)player->x] == 'C')
 		&& player->y < (int)player->y + 0.1)
 		return (1);
 	return (0);
@@ -36,10 +40,12 @@ static int	dir_north_east(t_data *data, t_player *player, int axis)
 
 static int	dir_south_west(t_data *data, t_player *player, int axis)
 {
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x - 1] == '1'
+	if (axis == 'x' && (data->map[(int)player->y][(int)player->x - 1] == '1'
+		|| data->map[(int)player->y][(int)player->x - 1] == 'C')
 		&& player->x < (int)player->x + 0.1)
 		return (1);
-	if (axis == 'y' && data->map[(int)player->y + 1][(int)player->x] == '1'
+	if (axis == 'y' && (data->map[(int)player->y + 1][(int)player->x] == '1'
+		|| data->map[(int)player->y + 1][(int)player->x] == 'C')
 		&& player->y > (int)player->y + 0.9)
 		return (1);
 	return (0);
@@ -47,10 +53,12 @@ static int	dir_south_west(t_data *data, t_player *player, int axis)
 
 static int	dir_south_east(t_data *data, t_player *player, int axis)
 {
-	if (axis == 'x' && data->map[(int)player->y][(int)player->x + 1] == '1'
+	if (axis == 'x' && (data->map[(int)player->y][(int)player->x + 1] == '1'
+		|| data->map[(int)player->y][(int)player->x + 1] == 'C')
 		&& player->x > (int)player->x + 0.9)
 		return (1);
-	if (axis == 'y' && data->map[(int)player->y + 1][(int)player->x] == '1'
+	if (axis == 'y' && (data->map[(int)player->y + 1][(int)player->x] == '1'
+		|| data->map[(int)player->y + 1][(int)player->x] == 'C')
 		&& player->y > (int)player->y + 0.9)
 		return (1);
 	return (0);

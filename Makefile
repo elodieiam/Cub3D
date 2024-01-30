@@ -37,6 +37,7 @@ SOURCES_BONUS = main_bonus.c \
 		parsing_bonus/fill_map_bonus.c \
 		parsing_bonus/search_player_bonus.c \
 		parsing_bonus/check_border_bonus.c \
+		parsing_bonus/check_door_bonus.c \
 		parsing_bonus/set_textures_bonus.c \
 		parsing_bonus/clear_bonus.c \
 		game_bonus/game_bonus.c \
