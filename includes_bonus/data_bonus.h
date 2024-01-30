@@ -6,12 +6,12 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:29:10 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:48:46 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-# define DATA_H
+#ifndef DATA_BONUS_H
+# define DATA_BONUS_H
 
 # define SCREEN_X 1280
 # define SCREEN_Y 720

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 10:51:54 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:54:34 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_mlx
 	void	*mlx_ptr;
 	void	*win;
 	t_buf	img_buf;
-	t_buf	img_map;
 	t_coord	put_line_coord;
 }	t_mlx;
 
@@ -89,12 +88,7 @@ int		get_hook(int key, t_game *game);
 int		let_hook(int key, t_player *player);
 
 void	background(t_mlx *mlx, t_data *data);
-void	minimap(t_mlx *mlx, t_player *player, char **map);
-void	insert_minimap(t_mlx *mlx, t_player *player);
 void	move_player(t_data *data, t_player *player);
-int		collision(t_data *data, t_player *player, char key, char axis);
-int		dir_collision(t_data *data, t_player *player, int axis, int dir);
-void	move_cam(t_mlx *mlx, t_player *player);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);

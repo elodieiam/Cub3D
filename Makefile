@@ -18,13 +18,8 @@ SOURCES = main.c \
 		parsing/clear.c \
 		game/game.c \
 		game/background.c \
-		game/map_buffer.c \
-		game/minimap.c \
 		player/hook.c \
 		player/move_player.c \
-		player/collision.c \
-		player/dir_collision.c \
-		player/move_cam.c \
 		utils/put_pixel.c \
 		utils/put_line.c \
 		utils/trigonometry.c

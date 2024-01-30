@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 10:11:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:54:19 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_keys
 	t_bool	d;
 	t_bool	left;
 	t_bool	right;
-	t_bool	mouse;
 }	t_keys;
 
 typedef struct s_player

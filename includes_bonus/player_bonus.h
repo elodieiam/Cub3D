@@ -6,12 +6,12 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:29:23 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:48:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef PLAYER_BONUS_H
+# define PLAYER_BONUS_H
 
 # define SPEED 0.05
 

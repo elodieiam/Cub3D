@@ -6,23 +6,11 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:18:03 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 10:49:19 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:50:27 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	mouse_hook(t_game *game)
-{
-	if (game->player.keys.mouse == 1)
-	{
-		mlx_mouse_move(game->mlx.mlx_ptr, game->mlx.win,
-			game->player.pov * 2, 0);
-		game->player.keys.mouse = 0;
-	}
-	else if (game->player.keys.mouse == 0)
-		game->player.keys.mouse = 1;
-}
 
 int	get_hook(int key, t_game *game)
 {
@@ -40,8 +28,6 @@ int	get_hook(int key, t_game *game)
 		game->player.keys.left = 0;
 	else if (key == XK_Right)
 		game->player.keys.right = 0;
-	else if (key == 'm')
-		mouse_hook(game);
 	return (0);
 }
 
