@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 14:25:50 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:46:19 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	set_game_cub(t_game *game)
 	mlx_mouse_move(game->mlx.mlx_ptr, game->mlx.win, game->player.pov, 0);
 	mlx_hook(game->mlx.win, 17, 0, clear_all_success, game);
 	mlx_hook(game->mlx.win, KeyPress, KeyPressMask, get_hook, game);
-	mlx_hook(game->mlx.win, KeyRelease, KeyReleaseMask, let_hook, &game->player);
+	mlx_hook(game->mlx.win,
+		KeyRelease, KeyReleaseMask, let_hook, &game->player);
 	mlx_loop_hook(game->mlx.mlx_ptr, game_cub, game);
 	mlx_loop(game->mlx.mlx_ptr);
 }

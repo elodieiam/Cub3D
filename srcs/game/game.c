@@ -6,13 +6,13 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 07:13:29 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 07:47:25 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:46:54 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int game_cub(t_game *game)
+int	game_cub(t_game *game)
 {
 	background(&game->mlx, &game->data);
 	minimap(&game->mlx, &game->player, game->data.map);

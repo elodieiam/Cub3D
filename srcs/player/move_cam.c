@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:06:53 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 19:01:50 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:35:47 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,17 @@ void	move_cam(t_mlx *mlx, t_player *player)
 		if (player->pov == 0)
 			player->pov = 360;
 		player->pov -= 1;
-		mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov * 2, 0);
+		if (player->keys.mouse == 0)
+			mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov * 2, 0);
 	}
 	if (player->keys.right == 0)
 	{
 		if (player->pov == 360)
 			player->pov = 0;
 		player->pov += 1;
-		mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov * 2, 0);
+		if (player->keys.mouse == 0)
+			mlx_mouse_move(mlx->mlx_ptr, mlx->win, player->pov * 2, 0);
 	}
-	mouse(mlx, player);
+	if (player->keys.mouse == 0)
+		mouse(mlx, player);
 }

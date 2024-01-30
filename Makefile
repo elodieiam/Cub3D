@@ -18,6 +18,7 @@ SOURCES = main.c \
 		parsing/clear.c \
 		game/game.c \
 		game/background.c \
+		game/map_buffer.c \
 		game/minimap.c \
 		player/hook.c \
 		player/move_player.c \

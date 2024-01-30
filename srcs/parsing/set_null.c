@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 14:27:33 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:23:47 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	set_player_null(t_player *player)
 	player->keys.d = 1;
 	player->keys.left = 1;
 	player->keys.right = 1;
+	player->keys.mouse = 0;
 }
 
 void	set_game_null(t_game *game)

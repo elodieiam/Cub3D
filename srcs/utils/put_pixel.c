@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:40:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 16:00:05 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:47:22 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	my_mlx_pixel_get(t_buf *buf, int x, int y)
 {
 	char	*dst;
 
-		dst = buf->addr
-			+ (y * buf->line_length + x * (buf->bits_per_pixel / 8));
+	dst = buf->addr
+		+ (y * buf->line_length + x * (buf->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
 }

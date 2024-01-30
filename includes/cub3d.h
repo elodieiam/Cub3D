@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 15:21:07 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:51:54 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		let_hook(int key, t_player *player);
 
 void	background(t_mlx *mlx, t_data *data);
 void	minimap(t_mlx *mlx, t_player *player, char **map);
+void	insert_minimap(t_mlx *mlx, t_player *player);
 void	move_player(t_data *data, t_player *player);
 int		collision(t_data *data, t_player *player, char key, char axis);
 int		dir_collision(t_data *data, t_player *player, int axis, int dir);

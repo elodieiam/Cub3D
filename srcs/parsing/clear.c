@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/29 14:27:06 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 10:45:46 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	clear_all_failed(t_game *game, char *error)
 	if (game->mlx.img_buf.img != NULL)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_buf.img);
 	if (game->mlx.img_map.img != NULL)
-	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_map.img);
+		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_map.img);
 	if (game->mlx.win != NULL)
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
 	if (game->mlx.mlx_ptr != NULL)
