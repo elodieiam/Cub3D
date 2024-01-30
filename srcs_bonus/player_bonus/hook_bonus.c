@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 11:18:03 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:32:47 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:04:01 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	get_hook(int key, t_game *game)
 		game->player.keys.right = 0;
 	else if (key == 'm')
 		mouse_hook(game);
+	else if (key == 'e')
+		door_gestion(game);
 	return (0);
 }
 
