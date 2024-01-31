@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 14:29:55 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 15:25:04 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:08:41 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	check_door(t_game *game)
 			if (game->data.map[i][j] == 'O' || game->data.map[i][j] == 'C')
 			{
 				if (check_beside(game->data.map, i, j) == 1)
-					clear_all_failed(game, "Door needs to be closed on 2 sides\n");
+				{
+					clear_all_failed(game,
+						"Door needs to be closed on 2 sides\n");
+				}
 			}
 			j ++;
 		}

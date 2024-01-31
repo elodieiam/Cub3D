@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:33:49 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:54:30 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_mlx(t_game *game)
 			&game->mlx.img_buf.bits_per_pixel, &game->mlx.img_buf.line_length,
 			&game->mlx.img_buf.endian);
 	game->mlx.img_map.img = mlx_new_image(game->mlx.mlx_ptr,
-			SCREEN_X, SCREEN_Y);
+			game->data.map_x * L_BOX, game->data.map_y * L_BOX);
 	game->mlx.img_map.addr = mlx_get_data_addr(game->mlx.img_map.img,
 			&game->mlx.img_map.bits_per_pixel, &game->mlx.img_map.line_length,
 			&game->mlx.img_map.endian);

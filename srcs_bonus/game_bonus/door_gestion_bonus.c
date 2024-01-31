@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:00:30 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 19:40:54 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 11:07:35 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 void	door_gestion(t_game *game)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	float	i;
 
-	x = (game->player.x * L_BOX + (int)(sin_pov(&game->player) * L_BOX)) / L_BOX;
-	y = (game->player.y * L_BOX - (int)(cos_pov(&game->player) * L_BOX)) / L_BOX;
-	if (game->data.map[y][x] == 'C')
+	i = 0.1;
+	while (i < 1.1)
 	{
-		if ((int)game->player.y != y || (int)game->player.x != x)
+		x = (int)(game->player.x + (sin_pov(&game->player)) * i);
+		y = (int)(game->player.y - (cos_pov(&game->player)) * i);
+		if (game->data.map[y][x] == '1')
+			return ;
+		else if (game->data.map[y][x] == 'C'
+			&& ((int)game->player.y != y || (int)game->player.x != x))
+		{
 			game->data.map[y][x] = 'O';
-	}
-	else if (game->data.map[y][x] == 'O')
-	{
-		if ((int)game->player.y != y || (int)game->player.x != x)
+			return ;
+		}
+		else if (game->data.map[y][x] == 'O'
+			&& ((int)game->player.y != y || (int)game->player.x != x))
+		{
 			game->data.map[y][x] = 'C';
+			return ;
+		}
+		i += 0.1;
 	}
 }
