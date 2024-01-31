@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 10:49:57 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/31 12:49:30 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:50:50 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	minimap(t_mlx *mlx, t_player *player, char **map)
 		x = 0;
 		y += L_BOX;
 	}
-	icon_player(mlx, player);
+	// icon_player(mlx, player);
+	my_mlx_pixel_put(&mlx->img_map, player->x * L_BOX, player->y * L_BOX, 0xFF0000);
 	insert_minimap(mlx, player);
 }

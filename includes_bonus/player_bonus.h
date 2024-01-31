@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 15:56:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:05:45 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # define SE 1
 # define SW 2
 # define NW 3
+
+# define FOV 200
 
 typedef int t_bool;
 

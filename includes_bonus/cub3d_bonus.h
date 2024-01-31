@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/31 12:03:18 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:23:38 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int		collision(t_data *data, t_player *player, char key, char axis);
 int		dir_collision(t_data *data, t_player *player, int axis, int dir);
 void	move_cam(t_mlx *mlx, t_player *player);
 void	door_gestion(t_game *game);
+
+void	cub3d(t_game *game);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);

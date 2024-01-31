@@ -46,6 +46,7 @@ SOURCES_BONUS = main_bonus.c \
 		game_bonus/map_buffer_bonus.c \
 		game_bonus/minimap_bonus.c \
 		game_bonus/door_gestion_bonus.c \
+		game_bonus/cub3d_bonus.c \
 		player_bonus/hook_bonus.c \
 		player_bonus/move_player_bonus.c \
 		player_bonus/collision_bonus.c \
