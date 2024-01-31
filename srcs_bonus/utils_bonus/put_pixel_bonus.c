@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:40:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:33:13 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:23:44 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,10 @@ void	my_mlx_pixel_put(t_buf *buf, int x, int y, int color)
 {
 	char	*dst;
 
-	if (x > 0 && y > 0 && x < SCREEN_X && y < SCREEN_Y)
+	if (x > 0 && y > 0 && x < buf->img_x && y < buf->img_y)
 	{
 		dst = buf->addr
 			+ (y * buf->line_length + x * (buf->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
-}
-
-int	my_mlx_pixel_get(t_buf *buf, int x, int y)
-{
-	char	*dst;
-
-	dst = buf->addr
-		+ (y * buf->line_length + x * (buf->bits_per_pixel / 8));
-	return (*(unsigned int *)dst);
 }

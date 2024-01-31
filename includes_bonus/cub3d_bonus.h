@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 16:04:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:03:18 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_buf
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		img_x;
+	int		img_y;
 }	t_buf;
 
 typedef struct s_coord

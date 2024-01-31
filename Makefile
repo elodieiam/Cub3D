@@ -21,6 +21,7 @@ SOURCES = main.c \
 		player/hook.c \
 		player/move_player.c \
 		utils/put_pixel.c \
+		utils/get_pixel.c \
 		utils/put_line.c \
 		utils/trigonometry.c
 
@@ -51,6 +52,7 @@ SOURCES_BONUS = main_bonus.c \
 		player_bonus/dir_collision_bonus.c \
 		player_bonus/move_cam_bonus.c \
 		utils_bonus/put_pixel_bonus.c \
+		utils_bonus/get_pixel_bonus.c \
 		utils_bonus/put_line_bonus.c \
 		utils_bonus/trigonometry_bonus.c
 
