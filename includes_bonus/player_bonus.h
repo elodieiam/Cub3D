@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/31 21:05:45 by niromano         ###   ########.fr       */
+/*   Updated: 2024/02/24 13:40:28 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SW 2
 # define NW 3
 
-# define FOV 200
+# define FOV 160
 
 typedef int t_bool;
 
