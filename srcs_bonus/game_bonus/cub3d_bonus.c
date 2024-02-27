@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/02/26 16:12:37 by niromano         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:44:56 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	calcul_distance(t_mlx *mlx)
 {
 	int	dist;
 
-	dist = sqrt((pow(mlx->put_line_coord.sx - mlx->put_line_coord.ex, 2)) 
-	+ (pow(mlx->put_line_coord.sy - mlx->put_line_coord.ey, 2)));
+	dist = sqrt((pow(mlx->put_line_coord.sx - mlx->put_line_coord.ex, 2))
+			+ (pow(mlx->put_line_coord.sy - mlx->put_line_coord.ey, 2)));
 	return (dist);
 }
 
@@ -68,44 +68,53 @@ int	calcul_distance(t_mlx *mlx)
 // 			game->mlx.put_line_coord.ey = (int)(game->player.y * L_BOX - (int)(cos_pov(&game->player) * i) - (int)(sinf(j * (RAD)) * i));
 // 			i += 0.1;
 // 		}
-// 		draw_ray(game, (j - (game->player.pov + 90 - FOV / 2)) * 8);
+// 		put_line(&game->mlx, &game->mlx.img_map, 0xFF0000);
+// 		// draw_ray(game, (j - (game->player.pov + 90 - FOV / 2)) * 8);
 // 		j ++;
 // 	}
 // }
 
+float	x_axes(t_game *game, int pov, float i)
+{
+	int		hit;
+	int		tmp_x;
+
+	hit = 0;
+	tmp_x = (int)game->mlx.put_line_coord.ex / L_BOX;
+	while (hit == 0)
+	{
+		game->mlx.put_line_coord.ex = (int)(game->player.x * L_BOX + (int)(sin_pov(&game->player) * i) - (int)(cosf(pov * (RAD)) * i));
+		game->mlx.put_line_coord.ey = (int)(game->player.y * L_BOX - (int)(cos_pov(&game->player) * i) - (int)(sinf(pov * (RAD)) * i));
+		i += 0.1;
+		if (tmp_x != (int)game->mlx.put_line_coord.ex / L_BOX
+			|| (int)game->mlx.put_line_coord.ey / L_BOX == -1
+			|| (int)game->mlx.put_line_coord.ey / L_BOX == game->data.map_y)
+			hit = 1;
+	}
+	return (i);
+}
+
 void	cub3d(t_game *game)
 {
+	float	i;
 	int		pov;
-	int		x_dist;
-	int		y_dist;
-	float	temp_x;
-	float	temp_y;
-	int		side;
+	int		x_map;
+	int		y_map;
 
-	game->mlx.put_line_coord.sx = (int)(game->player.x * L_BOX - (int)(cos_pov(&game->player)));
-	game->mlx.put_line_coord.sy = (int)(game->player.y * L_BOX - (int)(sin_pov(&game->player)));
+	i = 1.5;
 	pov = game->player.pov + 90;
-	// pov = game->player.pov + 90 - FOV / 2;
-	// while (pov != game->player.pov + 90 + FOV / 2)
-	// {
-		axes(game, pov, 'x');
-		x_dist = calcul_distance(&game->mlx);
-		temp_x = game->mlx.put_line_coord.ex;
-		temp_y = game->mlx.put_line_coord.ey;
-		axes(game, pov, 'y');
-		y_dist = calcul_distance(&game->mlx);
-		if (x_dist > y_dist)
-		{
-			side = 1;
-			put_line(&game->mlx, &game->mlx.img_map, 0xFF0000);
-		}
-		else
-		{
-			side = 0;
-			game->mlx.put_line_coord.ex = temp_x;
-			game->mlx.put_line_coord.ey = temp_y;
-			put_line(&game->mlx, &game->mlx.img_map, 0x00CD21);
-		}
-	// 	pov ++;
-	// }
+	x_map = game->player.x;
+	y_map = game->player.y;
+	game->mlx.put_line_coord.sx = (int)(game->player.x * L_BOX);
+	game->mlx.put_line_coord.sy = (int)(game->player.y * L_BOX);
+	game->mlx.put_line_coord.ex = (int)(game->player.x * L_BOX);
+	game->mlx.put_line_coord.ey = (int)(game->player.y * L_BOX);
+	while (game->data.map[(int)game->mlx.put_line_coord.ey / L_BOX][(int)game->mlx.put_line_coord.ex / L_BOX] != '1')
+	{
+		i = x_axes(game, pov, i);
+		if ((int)game->mlx.put_line_coord.ey / L_BOX == -1
+			|| (int)game->mlx.put_line_coord.ey / L_BOX == game->data.map_y)
+			break ;
+	}
+	put_line(&game->mlx, &game->mlx.img_map, 0xFFF000);
 }
