@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/02/28 15:55:31 by niromano         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:19:22 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,100 +74,91 @@ int	calcul_distance(t_mlx *mlx)
 // 	}
 // }
 
-void	cub3d(t_game *game)
+void	set_rc_data(t_game *game, t_raycast *rc)
 {
-	double	x_pos;
-	double	y_pos;
-	double	x_dir = -1;
-	double	y_dir = 0;
-	double	x_plane = 0;
-	double	y_plane = 0.66;
-	double	x_raydir;
-	double	y_raydir;
-	double camera_x;
+	rc->pos_x = game->player.y;
+	rc->pos_y = game->player.x;
+	rc->map_x = (int)game->player.y;
+	rc->map_y = (int)game->player.x;
+	rc->dir_x = -1;
+	rc->dir_y = 0;
+	rc->plane_x = 0;
+	rc->plane_y = 0.66;
+}
+
+void	cub3d(t_game *game, t_raycast *rc)
+{
 	int		w = SCREEN_X;
-	int		x_map;
-	int		y_map;
-	double	x_sidedist;
-	double	y_sidedist;
-	double	x_deltadist;
-	double	y_deltadist;
-	double	perpwalldist;
-	int		x_step;
-	int		y_step;
 	int		hit;
 	int		side;
 
-	x_pos = game->player.y;
-	y_pos = game->player.x;
-	x_map = (int)game->player.y;
-	y_map = (int)game->player.x;
+	set_rc_data(game, rc);
 	for(int x = 0; x < w; x++)
 	{
 		hit = 0;
-		camera_x = 2 * x / (double)w - 1;
-		x_raydir = x_dir + x_plane * camera_x;
-		y_raydir = y_dir + y_plane * camera_x;
-		if (x_raydir == 0)
-			x_deltadist = pow(10, 30);
+		rc->camera_x = 2 * x / (double)w - 1;
+		rc->raydir_x = rc->dir_x + rc->plane_x * rc->camera_x;
+		rc->raydir_y = rc->dir_y + rc->plane_y * rc->camera_x;
+		if (rc->raydir_x == 0)
+			rc->deltadist_x = pow(10, 30);
 		else
-			x_deltadist = fabs(1 / x_raydir);
-		if (y_raydir == 0)
-			y_deltadist = pow(10, 30);
+			rc->deltadist_x = fabs(1 / rc->raydir_x);
+		if (rc->raydir_y == 0)
+			rc->deltadist_y = pow(10, 30);
 		else
-			y_deltadist = fabs(1 / y_raydir);
-		if (x_raydir < 0)
+			rc->deltadist_y = fabs(1 / rc->raydir_y);
+		if (rc->raydir_x < 0)
 		{
-			x_step = -1;
-			x_sidedist = (x_pos - x_map) * x_deltadist;
+			rc->step_x = -1;
+			rc->sidedist_x = (rc->pos_x - rc->map_x) * rc->deltadist_x;
 		}
 		else
 		{
-			x_step = 1;
-			x_sidedist = (x_map + 1.0 - x_pos) * x_deltadist;
+			rc->step_x = 1;
+			rc->sidedist_x = (rc->map_x + 1.0 - rc->pos_x) * rc->deltadist_x;
 		}
-		if (y_raydir < 0)
+		if (rc->raydir_y < 0)
 		{
-			y_step = -1;
-			y_sidedist = (y_pos - y_map) * y_deltadist;
+			rc->step_y = -1;
+			rc->sidedist_y = (rc->pos_y - rc->map_y) * rc->deltadist_y;
 		}
 		else
 		{
-			y_step = 1;
-			y_sidedist = (y_map + 1.0 - y_pos) * y_deltadist;
+			rc->step_y = 1;
+			rc->sidedist_y = (rc->map_y + 1.0 - rc->pos_y) * rc->deltadist_y;
 		}
 		while (hit == 0)
 		{
-			if (x_sidedist < y_sidedist)
+			if (rc->sidedist_x < rc->sidedist_y)
 			{
-				x_sidedist += x_deltadist;
-				x_map += x_step;
+				rc->sidedist_x += rc->deltadist_x;
+				rc->map_x += rc->step_x;
 				side = 0;
 			}
 			else
 			{
-				y_sidedist += y_deltadist;
-				y_map += y_step;
+				rc->sidedist_y += rc->deltadist_y;
+				rc->map_y += rc->step_y;
 				side = 1;
 			}
 			// printf("%d / %d\n", x_map, y_map);
-			if (x_map < 0)
-				x_map = 0;
-			if (x_map >= game->data.map_y)
-				x_map = game->data.map_y - 1;
-			if (y_map < 0)
-				y_map = 0;
-			if (y_map >= game->data.map_x)
-				y_map = game->data.map_x - 1;
-			if (game->data.map[x_map][y_map] == '1')
+			if (rc->map_x < 0)
+				rc->map_x = 0;
+			if (rc->map_x >= game->data.map_y)
+				rc->map_x = game->data.map_y - 1;
+			if (rc->map_y < 0)
+				rc->map_y = 0;
+			if (rc->map_y >= game->data.map_x)
+				rc->map_y = game->data.map_x - 1;
+			if (game->data.map[rc->map_x][rc->map_y] == '1')
 				hit = 1;
 		}
 		if(side == 0)
-			perpwalldist = (x_sidedist - x_deltadist);
+			rc->perpwalldist = (rc->sidedist_x - rc->deltadist_x);
 		else
-			perpwalldist = (y_sidedist - y_deltadist);
+			rc->perpwalldist = (rc->sidedist_y - rc->deltadist_y);
 		int	h = SCREEN_Y;
-		int lineHeight = (int)(h / perpwalldist);
+		int lineHeight = (int)(h / rc->perpwalldist);
 		int drawStart = -lineHeight / 2 + h / 2;
 		if(drawStart < 0)
 			drawStart = 0;

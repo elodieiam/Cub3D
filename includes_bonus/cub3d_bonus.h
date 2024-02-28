@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/02/28 15:55:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:19:10 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,24 @@ typedef struct s_mlx
 
 typedef struct s_raycast
 {
-	
+	double	pos_x;
+	double	pos_y;
+	int		map_x;
+	int		map_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	double	camera_x;
+	double	raydir_x;
+	double	raydir_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	int		step_x;
+	int		step_y;
+	double	perpwalldist;
 }	t_raycast;
 
 typedef struct s_game
@@ -66,7 +83,7 @@ typedef struct s_game
 	t_mlx		mlx;
 	t_data		data;
 	t_player	player;
-	t_raycast	raycast;
+	t_raycast	rc;
 }	t_game;
 
 void	set_game_null(t_game *game);
@@ -106,7 +123,7 @@ int		dir_collision(t_data *data, t_player *player, int axis, int dir);
 void	move_cam(t_mlx *mlx, t_player *player);
 void	door_gestion(t_game *game);
 
-void	cub3d(t_game *game);
+void	cub3d(t_game *game, t_raycast *rc);
 int		calcul_distance(t_mlx *mlx);
 void	axes(t_game *game, int pov, char axes);
 
