@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/02/26 12:37:05 by niromano         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:55:00 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ typedef struct s_mlx
 	t_coord	put_line_coord;
 }	t_mlx;
 
+typedef struct s_raycast
+{
+	
+}	t_raycast;
+
 typedef struct s_game
 {
 	t_mlx		mlx;
 	t_data		data;
 	t_player	player;
+	t_raycast	raycast;
 }	t_game;
 
 void	set_game_null(t_game *game);
