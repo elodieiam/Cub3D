@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/02/28 16:19:10 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:54:04 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_game
 void	set_game_null(t_game *game);
 void	set_mlx_null(t_mlx *mlx);
 void	set_data_null(t_data *data);
+void	set_rc_data(t_data *data, t_player *player, t_raycast *rc);
 
 void	parsing(int argc, char **argv, t_game *game);
 int		ft_strlen_mat(char **mat);
@@ -108,6 +109,7 @@ int		my_mlx_pixel_get(t_buf *buf, int x, int y);
 void	put_line(t_mlx *mlx, t_buf *mlx_img, int color);
 float	cos_pov(t_player *player);
 float	sin_pov(t_player *player);
+void	atan_pov(t_player *player, t_raycast *rc);
 
 int		game_cub(t_game *game);
 
@@ -120,7 +122,7 @@ void	insert_minimap(t_mlx *mlx, t_player *player);
 void	move_player(t_data *data, t_player *player);
 int		collision(t_data *data, t_player *player, char key, char axis);
 int		dir_collision(t_data *data, t_player *player, int axis, int dir);
-void	move_cam(t_mlx *mlx, t_player *player);
+void	move_cam(t_mlx *mlx, t_player *player, t_raycast *rc);
 void	door_gestion(t_game *game);
 
 void	cub3d(t_game *game, t_raycast *rc);
