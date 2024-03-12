@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/11 16:09:41 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:11:11 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	cub3d(t_game *game, t_raycast *rc)
 				rc->map_y += rc->step_y;
 				side = 1;
 			}
-			if (game->data.map[rc->map_x][rc->map_y] == '1')
+			if (game->data.map[rc->map_x][rc->map_y] == '1' || game->data.map[rc->map_x][rc->map_y] == 'C')
 				hit = 1;
 		}
 		if (side == 0)
@@ -124,7 +124,9 @@ void	cub3d(t_game *game, t_raycast *rc)
 		game->mlx.put_line_coord.sy = drawstart;
 		game->mlx.put_line_coord.ex = x;
 		game->mlx.put_line_coord.ey = drawend;
-		if (side == 0)
+		if (game->data.map[rc->map_x][rc->map_y] == 'C')
+			put_line(&game->mlx, &game->mlx.img_buf, 0x00CD21);
+		else if (side == 0)
 			put_line(&game->mlx, &game->mlx.img_buf, 0xFFF000);
 		else
 			put_line(&game->mlx, &game->mlx.img_buf, 0xFF0000);
