@@ -1,8 +1,8 @@
 NO ./textures/wall.xpm
-SO ./textures/wall.xpm
-WE ./textures/wall.xpm
-EA ./textures/wall.xpm
-DO ./textures/wall.xpm
+SO ./textures/box.xpm
+WE ./textures/ground.xpm
+EA ./textures/orb.xpm
+DO ./textures/death.xpm
 
 F 255,10,255
 C 225,30,255
