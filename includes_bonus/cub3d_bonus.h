@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/11 13:54:04 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:12:35 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@
 
 # include "data_bonus.h"
 # include "player_bonus.h"
-
-typedef struct s_buf
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		img_x;
-	int		img_y;
-}	t_buf;
 
 typedef struct s_coord
 {
@@ -76,6 +65,9 @@ typedef struct s_raycast
 	int		step_x;
 	int		step_y;
 	double	perpwalldist;
+	int		lineheight;
+	int		drawstart;
+	int		drawend;
 }	t_raycast;
 
 typedef struct s_game

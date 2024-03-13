@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/11 12:34:13 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:23:27 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	set_data_null(t_data *data)
 	data->textures.raw_d = NULL;
 	data->textures.color_f = -1;
 	data->textures.color_c = -1;
-	data->textures.texture_n = NULL;
-	data->textures.texture_s = NULL;
-	data->textures.texture_w = NULL;
-	data->textures.texture_e = NULL;
-	data->textures.texture_d = NULL;
+	data->textures.texture_n.img = NULL;
+	data->textures.texture_s.img = NULL;
+	data->textures.texture_w.img = NULL;
+	data->textures.texture_e.img = NULL;
+	data->textures.texture_d.img = NULL;
 	data->map = NULL;
 	data->buffer = NULL;
 }

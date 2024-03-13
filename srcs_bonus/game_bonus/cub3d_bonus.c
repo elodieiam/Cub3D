@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/12 09:11:11 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:29:28 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,53 @@ void	set_rc_data(t_data *data, t_player *player, t_raycast *rc)
 	}
 }
 
+void	print_texture(t_game *game, t_raycast *rc, int side, int x)
+{
+	double	wall;
+	int		color;
+
+	if (side == 0)
+		wall = rc->pos_y + rc->perpwalldist * rc->raydir_y;
+	else
+		wall = rc->pos_x + rc->perpwalldist * rc->raydir_x;
+	wall -= floor((wall));
+	int texWidth = 60;
+	int texHeight = 60;
+	int texX = (int)(wall * (double)(texWidth));
+	if (side == 0 && rc->raydir_x > 0)
+		texX = texWidth - texX - 1;
+	if (side == 1 && rc->raydir_y < 0)
+		texX = texWidth - texX - 1;
+	double step = 1.0 * texHeight / rc->lineheight;
+	double texPos = (rc->drawstart - SCREEN_Y / 2 + rc->lineheight / 2) * step;
+	for (int y = rc->drawstart; y < rc->drawend; y++)
+	{
+		int texY = (int)texPos & (texHeight - 1);
+		texPos += step;
+		if (game->data.map[rc->map_x][rc->map_y] == 'C')
+			color = my_mlx_pixel_get(&game->data.textures.texture_d, texX, texY);
+		else if (side == 0)
+		{
+			if (rc->step_x < 0)
+				color = my_mlx_pixel_get(&game->data.textures.texture_n, texX, texY);
+			else
+				color = my_mlx_pixel_get(&game->data.textures.texture_s, texX, texY);
+		}
+		else
+		{
+			if (rc->step_y < 0)
+				color = my_mlx_pixel_get(&game->data.textures.texture_w, texX, texY);
+			else
+				color = my_mlx_pixel_get(&game->data.textures.texture_e, texX, texY);
+		}
+		my_mlx_pixel_put(&game->mlx.img_buf, x, y, color);
+	}
+}
+
 void	cub3d(t_game *game, t_raycast *rc)
 {
 	int	hit;
 	int	side;
-	int	lineheight;
-	int	drawstart;
-	int	drawend;
 	int	x;
 
 	x = 0;
@@ -113,23 +153,14 @@ void	cub3d(t_game *game, t_raycast *rc)
 			rc->perpwalldist = (rc->sidedist_x - rc->deltadist_x);
 		else
 			rc->perpwalldist = (rc->sidedist_y - rc->deltadist_y);
-		lineheight = (int)(SCREEN_Y / rc->perpwalldist);
-		drawstart = -lineheight / 2 + SCREEN_Y / 2;
-		if (drawstart < 0)
-			drawstart = 0;
-		drawend = lineheight / 2 + SCREEN_Y / 2;
-		if (drawend >= SCREEN_Y)
-			drawend = SCREEN_Y - 1;
-		game->mlx.put_line_coord.sx = x;
-		game->mlx.put_line_coord.sy = drawstart;
-		game->mlx.put_line_coord.ex = x;
-		game->mlx.put_line_coord.ey = drawend;
-		if (game->data.map[rc->map_x][rc->map_y] == 'C')
-			put_line(&game->mlx, &game->mlx.img_buf, 0x00CD21);
-		else if (side == 0)
-			put_line(&game->mlx, &game->mlx.img_buf, 0xFFF000);
-		else
-			put_line(&game->mlx, &game->mlx.img_buf, 0xFF0000);
+		rc->lineheight = (int)(SCREEN_Y / rc->perpwalldist);
+		rc->drawstart = -rc->lineheight / 2 + SCREEN_Y / 2;
+		if (rc->drawstart < 0)
+			rc->drawstart = 0;
+		rc->drawend = rc->lineheight / 2 + SCREEN_Y / 2;
+		if (rc->drawend >= SCREEN_Y)
+			rc->drawend = SCREEN_Y - 1;
+		print_texture(game, rc, side, x);
 		x ++;
 	}
 }

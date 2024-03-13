@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:44:27 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 15:27:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:13:41 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void	clear_data(t_data data)
 
 int	clear_all_success(t_game *game)
 {
-	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_n);
-	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_s);
-	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_w);
-	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e);
-	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_d);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_n.img);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_s.img);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_w.img);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e.img);
+	mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_d.img);
 	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_buf.img);
 	mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_map.img);
 	mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win);
@@ -78,16 +78,16 @@ int	clear_all_success(t_game *game)
 
 void	clear_all_failed(t_game *game, char *error)
 {
-	if (game->data.textures.texture_n != NULL)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_n);
-	if (game->data.textures.texture_s != NULL)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_s);
-	if (game->data.textures.texture_w != NULL)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_w);
-	if (game->data.textures.texture_e != NULL)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e);
-	if (game->data.textures.texture_d != NULL)
-		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_d);
+	if (game->data.textures.texture_n.img != NULL)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_n.img);
+	if (game->data.textures.texture_s.img != NULL)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_s.img);
+	if (game->data.textures.texture_w.img != NULL)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_w.img);
+	if (game->data.textures.texture_e.img != NULL)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_e.img);
+	if (game->data.textures.texture_d.img != NULL)
+		mlx_destroy_image(game->mlx.mlx_ptr, game->data.textures.texture_d.img);
 	if (game->mlx.img_buf.img != NULL)
 		mlx_destroy_image(game->mlx.mlx_ptr, game->mlx.img_buf.img);
 	if (game->mlx.img_map.img != NULL)
