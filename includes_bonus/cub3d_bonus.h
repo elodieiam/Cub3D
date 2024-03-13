@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 14:12:35 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:04:54 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_raycast
 	int		lineheight;
 	int		drawstart;
 	int		drawend;
+	int		text_width;
+	int		text_height;
 }	t_raycast;
 
 typedef struct s_game

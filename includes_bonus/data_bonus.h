@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 11:12:14 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:09:07 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define RAD PI/180
 
 # define L_BOX 20
+
+typedef enum e_text {
+	TEXT_N,
+	TEXT_S,
+	TEXT_W,
+	TEXT_E,
+	TEXT_D,
+} t_text;
 
 typedef struct s_buf
 {

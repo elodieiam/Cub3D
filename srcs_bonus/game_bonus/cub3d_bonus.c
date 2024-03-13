@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 14:29:28 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:51:51 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,45 +44,89 @@ void	set_rc_data(t_data *data, t_player *player, t_raycast *rc)
 	}
 }
 
+void	init_text_len(t_textures text, t_raycast *rc, int texture)
+{
+	if (texture == TEXT_N)
+	{
+		rc->text_height = text.texture_n.img_y;
+		rc->text_width = text.texture_n.img_x;
+	}
+	else if (texture == TEXT_S)
+	{
+		rc->text_height = text.texture_s.img_y;
+		rc->text_width = text.texture_s.img_x;
+	}
+	else if (texture == TEXT_W)
+	{
+		rc->text_height = text.texture_w.img_y;
+		rc->text_width = text.texture_w.img_x;
+	}
+	else if (texture == TEXT_E)
+	{
+		rc->text_height = text.texture_e.img_y;
+		rc->text_width = text.texture_e.img_x;
+	}
+	else if (texture == TEXT_D)
+	{
+		rc->text_height = text.texture_d.img_y;
+		rc->text_width = text.texture_d.img_x;
+	}
+}
+
+int	what_texture(t_game *game, t_raycast *rc, int side)
+{
+	if (game->data.map[rc->map_x][rc->map_y] == 'C')
+		return (TEXT_D);
+	else if (side == 0)
+	{
+		if (rc->step_x < 0)
+			return (TEXT_N);
+		else
+			return (TEXT_S);
+	}
+	else
+	{
+		if (rc->step_y < 0)
+			return (TEXT_W);
+		else
+			return (TEXT_E);
+	}
+	return (-1);
+}
+
 void	print_texture(t_game *game, t_raycast *rc, int side, int x)
 {
 	double	wall;
 	int		color;
 
+	init_text_len(game->data.textures, rc, what_texture(game, rc, side));
 	if (side == 0)
 		wall = rc->pos_y + rc->perpwalldist * rc->raydir_y;
 	else
 		wall = rc->pos_x + rc->perpwalldist * rc->raydir_x;
 	wall -= floor((wall));
-	int texWidth = 60;
-	int texHeight = 60;
-	int texX = (int)(wall * (double)(texWidth));
+	int texX = (int)(wall * (double)(rc->text_width));
 	if (side == 0 && rc->raydir_x > 0)
-		texX = texWidth - texX - 1;
+		texX = rc->text_width - texX - 1;
 	if (side == 1 && rc->raydir_y < 0)
-		texX = texWidth - texX - 1;
-	double step = 1.0 * texHeight / rc->lineheight;
+		texX = rc->text_width - texX - 1;
+	double step = 1.0 * rc->text_height / rc->lineheight;
 	double texPos = (rc->drawstart - SCREEN_Y / 2 + rc->lineheight / 2) * step;
+	side = what_texture(game, rc, side);
 	for (int y = rc->drawstart; y < rc->drawend; y++)
 	{
-		int texY = (int)texPos & (texHeight - 1);
+		int texY = (int)texPos & (rc->text_height - 1);
 		texPos += step;
-		if (game->data.map[rc->map_x][rc->map_y] == 'C')
+		if (side == TEXT_N)
+			color = my_mlx_pixel_get(&game->data.textures.texture_n, texX, texY);
+		else if (side == TEXT_S)
+			color = my_mlx_pixel_get(&game->data.textures.texture_s, texX, texY);
+		else if (side == TEXT_W)
+			color = my_mlx_pixel_get(&game->data.textures.texture_w, texX, texY);
+		else if (side == TEXT_E)
+			color = my_mlx_pixel_get(&game->data.textures.texture_e, texX, texY);
+		else if (side == TEXT_D)
 			color = my_mlx_pixel_get(&game->data.textures.texture_d, texX, texY);
-		else if (side == 0)
-		{
-			if (rc->step_x < 0)
-				color = my_mlx_pixel_get(&game->data.textures.texture_n, texX, texY);
-			else
-				color = my_mlx_pixel_get(&game->data.textures.texture_s, texX, texY);
-		}
-		else
-		{
-			if (rc->step_y < 0)
-				color = my_mlx_pixel_get(&game->data.textures.texture_w, texX, texY);
-			else
-				color = my_mlx_pixel_get(&game->data.textures.texture_e, texX, texY);
-		}
 		my_mlx_pixel_put(&game->mlx.img_buf, x, y, color);
 	}
 }

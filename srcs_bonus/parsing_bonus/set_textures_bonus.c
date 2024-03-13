@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 08:00:11 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 11:58:10 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:55:15 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ t_buf	set_addr(t_game *game, char *texture)
 {
 	t_buf	buf;
 
-	buf.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, texture, &buf.img_x, &buf.img_y);
+	buf.img = mlx_xpm_file_to_image(game->mlx.mlx_ptr, texture, &buf.img_x,
+			&buf.img_y);
 	if (buf.img == NULL)
 		return (buf);
 	buf.addr = mlx_get_data_addr(buf.img, &buf.bits_per_pixel,
-		&buf.line_length, &buf.endian);
+			&buf.line_length, &buf.endian);
 	return (buf);
 }
 
