@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 15:04:54 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:58:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,7 @@ void	move_cam(t_mlx *mlx, t_player *player, t_raycast *rc);
 void	door_gestion(t_game *game);
 
 void	cub3d(t_game *game, t_raycast *rc);
-int		calcul_distance(t_mlx *mlx);
-void	axes(t_game *game, int pov, char axes);
+void	print_texture(t_game *game, t_raycast *rc, int side, int x);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);
