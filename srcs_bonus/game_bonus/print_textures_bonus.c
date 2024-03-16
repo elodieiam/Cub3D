@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:56:45 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 16:16:27 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/16 06:40:44 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,32 @@ int	what_texture(t_game *game, t_raycast *rc, int side)
 	else if (side == 0)
 	{
 		if (rc->step_x < 0)
+		{
+			if (game->data.map[rc->map_x + 1][rc->map_y] == 'O')
+				return (TEXT_D);
 			return (TEXT_N);
+		}
 		else
+		{
+			if (game->data.map[rc->map_x - 1][rc->map_y] == 'O')
+				return (TEXT_D);
 			return (TEXT_S);
+		}
 	}
 	else
 	{
 		if (rc->step_y < 0)
+		{
+			if (game->data.map[rc->map_x][rc->map_y + 1] == 'O')
+				return (TEXT_D);
 			return (TEXT_W);
+		}
 		else
+		{
+			if (game->data.map[rc->map_x][rc->map_y - 1] == 'O')
+				return (TEXT_D);
 			return (TEXT_E);
+		}
 	}
 	return (-1);
 }
