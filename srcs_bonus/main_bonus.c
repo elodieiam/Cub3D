@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:28:21 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:45:53 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	game.test = 0;
 	set_game_null(&game);
 	parsing(argc, argv, &game);
 	set_mlx(&game);

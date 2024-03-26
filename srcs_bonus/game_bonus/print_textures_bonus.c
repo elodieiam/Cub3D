@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:56:45 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:40:25 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:46:24 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ static int	get_color(t_game *game, int side, int x, int y)
 		return (my_mlx_pixel_get(&game->data.textures.texture_e, x, y));
 	else if (side == TEXT_C)
 	{
-		if (game->test > game->rc.text_width)
-			game->test = 0;
-		x += game->test;
+		if (game->rc.anim > game->rc.text_width)
+			game->rc.anim = 0;
+		x += game->rc.anim;
 		while (x > game->rc.text_width - 1)
 			x -= game->rc.text_width;
-		game->test += 0.00001;
+		game->rc.anim += 0.00001;
 		return (my_mlx_pixel_get(&game->data.textures.texture_d, x, y));
 	}
 	else if (side == TEXT_O)

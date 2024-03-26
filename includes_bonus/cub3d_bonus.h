@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:35:31 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:45:37 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_raycast
 	int		drawend;
 	int		text_width;
 	int		text_height;
+	float	anim;
 }	t_raycast;
 
 typedef struct s_game
@@ -78,7 +79,6 @@ typedef struct s_game
 	t_data		data;
 	t_player	player;
 	t_raycast	rc;
-	float		test;
 }	t_game;
 
 void	set_game_null(t_game *game);

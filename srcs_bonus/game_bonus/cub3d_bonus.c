@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 16:04:18 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:45:48 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	set_rc_data2(t_data *data, t_player *player, t_raycast *rc)
 		rc->plane_x = 0;
 		rc->plane_y = -0.66;
 	}
+	rc->anim = 0;
 }
 
 void	set_rc_data(t_data *data, t_player *player, t_raycast *rc)
