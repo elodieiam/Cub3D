@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:27:10 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:17:32 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 11:03:23 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ int	ft_strlen_mat(char **mat)
 	return (i);
 }
 
+int	check_case(char cara)
+{
+	if (cara == '0' || cara == 'N' || cara == 'S'
+		|| cara == 'W' || cara == 'E' || cara == 'O' || cara == 'C')
+		return (0);
+	return (1);
+}
+
 void	check_border_line(t_game *game, int i)
 {
 	int	j;
@@ -31,15 +39,9 @@ void	check_border_line(t_game *game, int i)
 	{
 		if ((i == 0 || j == 0 || i == ft_strlen_mat(game->data.map) - 1
 				|| j == (int)ft_strlen(game->data.map[i]) - 1)
-			&& (game->data.map[i][j] == '0' || game->data.map[i][j] == 'N'
-			|| game->data.map[i][j] == 'S' || game->data.map[i][j] == 'W'
-			|| game->data.map[i][j] == 'E' || game->data.map[i][j] == 'O'
-			|| game->data.map[i][j] == 'C'))
+			&& check_case(game->data.map[i][j]) == 0)
 			clear_all_failed(game, "The map is not closed\n");
-		else if (game->data.map[i][j] == '0' || game->data.map[i][j] == 'N'
-			|| game->data.map[i][j] == 'S' || game->data.map[i][j] == 'W'
-			|| game->data.map[i][j] == 'E' || game->data.map[i][j] == 'O'
-			|| game->data.map[i][j] == 'C')
+		else if (check_case(game->data.map[i][j]) == 0)
 		{
 			if (game->data.map[i - 1][j] == '.'
 				|| game->data.map[i][j - 1] == '.'
