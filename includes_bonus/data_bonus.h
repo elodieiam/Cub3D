@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/13 15:09:07 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:22:17 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef enum e_text {
 	TEXT_S,
 	TEXT_W,
 	TEXT_E,
-	TEXT_D,
+	TEXT_C,
+	TEXT_O,
 } t_text;
 
 typedef struct s_buf

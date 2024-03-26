@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 15:56:45 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/16 06:40:44 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/26 10:40:25 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_text_len(t_textures text, t_raycast *rc, int texture)
 		rc->text_height = text.texture_e.img_y;
 		rc->text_width = text.texture_e.img_x;
 	}
-	else if (texture == TEXT_D)
+	else if (texture == TEXT_C || texture == TEXT_O)
 	{
 		rc->text_height = text.texture_d.img_y;
 		rc->text_width = text.texture_d.img_x;
@@ -44,19 +44,19 @@ void	init_text_len(t_textures text, t_raycast *rc, int texture)
 int	what_texture(t_game *game, t_raycast *rc, int side)
 {
 	if (game->data.map[rc->map_x][rc->map_y] == 'C')
-		return (TEXT_D);
+		return (TEXT_C);
 	else if (side == 0)
 	{
 		if (rc->step_x < 0)
 		{
 			if (game->data.map[rc->map_x + 1][rc->map_y] == 'O')
-				return (TEXT_D);
+				return (TEXT_O);
 			return (TEXT_N);
 		}
 		else
 		{
 			if (game->data.map[rc->map_x - 1][rc->map_y] == 'O')
-				return (TEXT_D);
+				return (TEXT_O);
 			return (TEXT_S);
 		}
 	}
@@ -65,13 +65,13 @@ int	what_texture(t_game *game, t_raycast *rc, int side)
 		if (rc->step_y < 0)
 		{
 			if (game->data.map[rc->map_x][rc->map_y + 1] == 'O')
-				return (TEXT_D);
+				return (TEXT_O);
 			return (TEXT_W);
 		}
 		else
 		{
 			if (game->data.map[rc->map_x][rc->map_y - 1] == 'O')
-				return (TEXT_D);
+				return (TEXT_O);
 			return (TEXT_E);
 		}
 	}
@@ -88,8 +88,18 @@ static int	get_color(t_game *game, int side, int x, int y)
 		return (my_mlx_pixel_get(&game->data.textures.texture_w, x, y));
 	else if (side == TEXT_E)
 		return (my_mlx_pixel_get(&game->data.textures.texture_e, x, y));
-	else if (side == TEXT_D)
+	else if (side == TEXT_C)
+	{
+		if (game->test > game->rc.text_width)
+			game->test = 0;
+		x += game->test;
+		while (x > game->rc.text_width - 1)
+			x -= game->rc.text_width;
+		game->test += 0.00001;
 		return (my_mlx_pixel_get(&game->data.textures.texture_d, x, y));
+	}
+	else if (side == TEXT_O)
+		return ((my_mlx_pixel_get(&game->data.textures.texture_d, x, y) >> 1) & 8355711);
 	return (0);
 }
 
