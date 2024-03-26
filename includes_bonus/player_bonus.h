@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 15:56:00 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:36:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PLAYER_BONUS_H
 
 # define SPEED 0.05
+# define ROT_SPEED 0.02
 
 # define NE 0
 # define SE 1

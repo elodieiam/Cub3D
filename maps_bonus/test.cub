@@ -1,8 +1,8 @@
-NO ./textures/wall.xpm
-SO ./textures/wall.xpm
-WE ./textures/wall.xpm
-EA ./textures/wall.xpm
-DO ./textures/wall.xpm
+NO ./textures/test/test_8x8.xpm
+SO ./textures/test/test_16x16.xpm
+WE ./textures/test/test_32x32.xpm
+EA ./textures/test/test_64x64.xpm
+DO ./textures/test/test_door.xpm
 
 F 255,10,255
 C 225,30,255
@@ -11,8 +11,8 @@ C 225,30,255
 100000001
 100000001
 100000001
-1000N0001
+1000N1001
 100000001
-100000001
+1001C1001
 100000001
 111111111

@@ -1,8 +1,8 @@
-NO ./textures/wall.xpm
-SO ./textures/box.xpm
-WE ./textures/ground.xpm
-EA ./textures/orb.xpm
-DO ./textures/death.xpm
+NO ./textures/mc/bamboo.xpm
+SO ./textures/mc/barrel.xpm
+WE ./textures/mc/stone.xpm
+EA ./textures/mc/planks.xpm
+DO ./textures/mc/quartz.xpm
 
 F 220,100,0
 C 225,30,0

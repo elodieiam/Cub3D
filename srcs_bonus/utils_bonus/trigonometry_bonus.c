@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 13:59:18 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:33:20 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/11 15:42:09 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,12 @@ float	cos_pov(t_player *player)
 float	sin_pov(t_player *player)
 {
 	return (sinf(player->pov * (RAD)));
+}
+
+void	atan_pov(t_player *player, t_raycast *rc)
+{
+	player->pov = atan2(rc->dir_x, rc->dir_y) * 180 / PI;
+	player->pov += 90;
+	if (player->pov < 0)
+		player->pov += 360;
 }

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 08:25:21 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 12:31:55 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:34:43 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	take_pov(char c)
 	if (c == 'N')
 		return (0);
 	else if (c == 'S')
-		return (360);
-	else if (c == 'W')
-		return (540);
-	else if (c == 'E')
 		return (180);
+	else if (c == 'W')
+		return (270);
+	else if (c == 'E')
+		return (90);
 	return (-1);
 }
 
