@@ -6,54 +6,15 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:45:48 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:35:52 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/cub3d_bonus.h"
 
-static void	set_rc_data2(t_data *data, t_player *player, t_raycast *rc)
-{
-	if (data->map[(int)player->y][(int)player->x] == 'W')
-	{
-		rc->dir_x = 0;
-		rc->dir_y = -1;
-		rc->plane_x = -0.66;
-		rc->plane_y = 0;
-	}
-	else if (data->map[(int)player->y][(int)player->x] == 'S')
-	{
-		rc->dir_x = 1;
-		rc->dir_y = 0;
-		rc->plane_x = 0;
-		rc->plane_y = -0.66;
-	}
-	rc->anim = 0;
-}
-
-void	set_rc_data(t_data *data, t_player *player, t_raycast *rc)
-{
-	if (data->map[(int)player->y][(int)player->x] == 'N')
-	{
-		rc->dir_x = -1;
-		rc->dir_y = 0;
-		rc->plane_x = 0;
-		rc->plane_y = 0.66;
-	}
-	else if (data->map[(int)player->y][(int)player->x] == 'E')
-	{
-		rc->dir_x = 0;
-		rc->dir_y = 1;
-		rc->plane_x = 0.66;
-		rc->plane_y = 0;
-	}
-	set_rc_data2(data, player, rc);
-}
-
 void	cub3d(t_game *game, t_raycast *rc)
 {
 	int	hit;
-	int	side;
 	int	x;
 
 	x = 0;
@@ -101,19 +62,19 @@ void	cub3d(t_game *game, t_raycast *rc)
 			{
 				rc->sidedist_x += rc->deltadist_x;
 				rc->map_x += rc->step_x;
-				side = 0;
+				rc->side = 0;
 			}
 			else
 			{
 				rc->sidedist_y += rc->deltadist_y;
 				rc->map_y += rc->step_y;
-				side = 1;
+				rc->side = 1;
 			}
 			if (game->data.map[rc->map_x][rc->map_y] == '1'
 				|| game->data.map[rc->map_x][rc->map_y] == 'C')
 				hit = 1;
 		}
-		if (side == 0)
+		if (rc->side == 0)
 			rc->perpwalldist = (rc->sidedist_x - rc->deltadist_x);
 		else
 			rc->perpwalldist = (rc->sidedist_y - rc->deltadist_y);
@@ -124,7 +85,7 @@ void	cub3d(t_game *game, t_raycast *rc)
 		rc->drawend = rc->lineheight / 2 + SCREEN_Y / 2;
 		if (rc->drawend >= SCREEN_Y)
 			rc->drawend = SCREEN_Y - 1;
-		print_texture(game, rc, side, x);
+		print_texture(game, rc, x);
 		x ++;
 	}
 }

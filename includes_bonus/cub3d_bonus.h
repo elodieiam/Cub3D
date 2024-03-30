@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:20:25 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:45:37 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/30 15:33:48 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_raycast
 	double	deltadist_y;
 	int		step_x;
 	int		step_y;
+	int		side;
 	double	perpwalldist;
 	int		lineheight;
 	int		drawstart;
@@ -121,7 +122,8 @@ void	move_cam(t_mlx *mlx, t_player *player, t_raycast *rc);
 void	door_gestion(t_game *game);
 
 void	cub3d(t_game *game, t_raycast *rc);
-void	print_texture(t_game *game, t_raycast *rc, int side, int x);
+void	init_text_len(t_textures text, t_raycast *rc, int texture);
+void	print_texture(t_game *game, t_raycast *rc, int x);
 
 void	clear_list(t_list *list);
 void	clear_mat(char **mat);
