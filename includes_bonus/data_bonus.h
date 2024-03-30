@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:58:28 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/26 10:22:17 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/30 17:33:10 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define SCREEN_Y 720
 
 # define PI 3.14159265358
-# define RAD PI/180
 
 # define L_BOX 20
 
@@ -28,7 +27,7 @@ typedef enum e_text {
 	TEXT_E,
 	TEXT_C,
 	TEXT_O,
-} t_text;
+}	t_text;
 
 typedef struct s_buf
 {

@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:47:37 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/11 15:36:43 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:59:08 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define SW 2
 # define NW 3
 
-typedef int t_bool;
+typedef int	t_bool;
 
 typedef struct s_keys
 {

@@ -6,74 +6,90 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:34:50 by niromano          #+#    #+#             */
-/*   Updated: 2024/03/30 15:35:52 by niromano         ###   ########.fr       */
+/*   Updated: 2024/03/30 16:21:31 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/cub3d_bonus.h"
 
-void	cub3d(t_game *game, t_raycast *rc)
+static void	set_rc(t_game *game, t_raycast *rc, int x)
+{
+	rc->pos_x = game->player.y;
+	rc->pos_y = game->player.x;
+	rc->map_x = (int)game->player.y;
+	rc->map_y = (int)game->player.x;
+	rc->camera_x = 2 * x / (double)SCREEN_X - 1;
+	rc->raydir_x = rc->dir_x + rc->plane_x * rc->camera_x;
+	rc->raydir_y = rc->dir_y + rc->plane_y * rc->camera_x;
+	if (rc->raydir_x == 0)
+		rc->deltadist_x = pow(10, 30);
+	else
+		rc->deltadist_x = fabs(1 / rc->raydir_x);
+	if (rc->raydir_y == 0)
+		rc->deltadist_y = pow(10, 30);
+	else
+		rc->deltadist_y = fabs(1 / rc->raydir_y);
+}
+
+static void	set_step(t_raycast *rc)
+{
+	if (rc->raydir_x < 0)
+	{
+		rc->step_x = -1;
+		rc->sidedist_x = (rc->pos_x - rc->map_x) * rc->deltadist_x;
+	}
+	else
+	{
+		rc->step_x = 1;
+		rc->sidedist_x = (rc->map_x + 1.0 - rc->pos_x) * rc->deltadist_x;
+	}
+	if (rc->raydir_y < 0)
+	{
+		rc->step_y = -1;
+		rc->sidedist_y = (rc->pos_y - rc->map_y) * rc->deltadist_y;
+	}
+	else
+	{
+		rc->step_y = 1;
+		rc->sidedist_y = (rc->map_y + 1.0 - rc->pos_y) * rc->deltadist_y;
+	}
+}
+
+static void	while_hit(t_game *game, t_raycast *rc)
 {
 	int	hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		if (rc->sidedist_x < rc->sidedist_y)
+		{
+			rc->sidedist_x += rc->deltadist_x;
+			rc->map_x += rc->step_x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->sidedist_y += rc->deltadist_y;
+			rc->map_y += rc->step_y;
+			rc->side = 1;
+		}
+		if (game->data.map[rc->map_x][rc->map_y] == '1'
+			|| game->data.map[rc->map_x][rc->map_y] == 'C')
+			hit = 1;
+	}
+}
+
+void	cub3d(t_game *game, t_raycast *rc)
+{
 	int	x;
 
 	x = 0;
 	while (x < SCREEN_X)
 	{
-		hit = 0;
-		rc->pos_x = game->player.y;
-		rc->pos_y = game->player.x;
-		rc->map_x = (int)game->player.y;
-		rc->map_y = (int)game->player.x;
-		rc->camera_x = 2 * x / (double)SCREEN_X - 1;
-		rc->raydir_x = rc->dir_x + rc->plane_x * rc->camera_x;
-		rc->raydir_y = rc->dir_y + rc->plane_y * rc->camera_x;
-		if (rc->raydir_x == 0)
-			rc->deltadist_x = pow(10, 30);
-		else
-			rc->deltadist_x = fabs(1 / rc->raydir_x);
-		if (rc->raydir_y == 0)
-			rc->deltadist_y = pow(10, 30);
-		else
-			rc->deltadist_y = fabs(1 / rc->raydir_y);
-		if (rc->raydir_x < 0)
-		{
-			rc->step_x = -1;
-			rc->sidedist_x = (rc->pos_x - rc->map_x) * rc->deltadist_x;
-		}
-		else
-		{
-			rc->step_x = 1;
-			rc->sidedist_x = (rc->map_x + 1.0 - rc->pos_x) * rc->deltadist_x;
-		}
-		if (rc->raydir_y < 0)
-		{
-			rc->step_y = -1;
-			rc->sidedist_y = (rc->pos_y - rc->map_y) * rc->deltadist_y;
-		}
-		else
-		{
-			rc->step_y = 1;
-			rc->sidedist_y = (rc->map_y + 1.0 - rc->pos_y) * rc->deltadist_y;
-		}
-		while (hit == 0)
-		{
-			if (rc->sidedist_x < rc->sidedist_y)
-			{
-				rc->sidedist_x += rc->deltadist_x;
-				rc->map_x += rc->step_x;
-				rc->side = 0;
-			}
-			else
-			{
-				rc->sidedist_y += rc->deltadist_y;
-				rc->map_y += rc->step_y;
-				rc->side = 1;
-			}
-			if (game->data.map[rc->map_x][rc->map_y] == '1'
-				|| game->data.map[rc->map_x][rc->map_y] == 'C')
-				hit = 1;
-		}
+		set_rc(game, rc, x);
+		set_step(rc);
+		while_hit(game, rc);
 		if (rc->side == 0)
 			rc->perpwalldist = (rc->sidedist_x - rc->deltadist_x);
 		else
