@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 15:22:47 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/31 15:23:06 by niromano         ###   ########.fr       */
+/*   Created: 2024/01/31 15:23:26 by niromano          #+#    #+#             */
+/*   Updated: 2024/04/02 10:33:14 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	my_mlx_pixel_get(t_buf *buf, int x, int y)
 {
 	char	*dst;
 
-	if (x > 0 && y > 0 && x < buf->img_x && y < buf->img_y)
+	if (x >= 0 && y >= 0 && x < buf->img_x && y < buf->img_y)
 	{
 		dst = buf->addr
 			+ (y * buf->line_length + x * (buf->bits_per_pixel / 8));

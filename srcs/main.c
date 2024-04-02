@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:19:42 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/31 15:20:19 by niromano         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:40:33 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	set_mlx(t_game *game)
 			&game->mlx.img_buf.endian);
 	game->mlx.img_buf.img_x = SCREEN_X;
 	game->mlx.img_buf.img_y = SCREEN_Y;
+	game->mlx.img_map.img = mlx_new_image(game->mlx.mlx_ptr,
+			game->data.map_x * L_BOX, game->data.map_y * L_BOX);
+	game->mlx.img_map.addr = mlx_get_data_addr(game->mlx.img_map.img,
+			&game->mlx.img_map.bits_per_pixel, &game->mlx.img_map.line_length,
+			&game->mlx.img_map.endian);
+	game->mlx.img_map.img_x = game->data.map_x * L_BOX;
+	game->mlx.img_map.img_y = game->data.map_y * L_BOX;
 	set_textures(game);
 }
 
@@ -48,6 +55,7 @@ int	main(int argc, char **argv)
 	set_game_null(&game);
 	parsing(argc, argv, &game);
 	set_mlx(&game);
+	set_rc_data(&game.data, &game.player, &game.rc);
 	set_game_cub(&game);
 	return (0);
 }

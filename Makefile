@@ -18,8 +18,13 @@ SOURCES = main.c \
 		parsing/clear.c \
 		game/game.c \
 		game/background.c \
+		game/set_rc_data.c \
+		game/cub3d.c \
+		game/init_text_len.c \
+		game/print_textures.c \
 		player/hook.c \
 		player/move_player.c \
+		player/move_cam.c \
 		utils/put_pixel.c \
 		utils/get_pixel.c \
 		utils/put_line.c \
@@ -46,9 +51,9 @@ SOURCES_BONUS = main_bonus.c \
 		game_bonus/map_buffer_bonus.c \
 		game_bonus/minimap_bonus.c \
 		game_bonus/door_gestion_bonus.c \
-		game_bonus/set_rc_data.c \
+		game_bonus/set_rc_data_bonus.c \
 		game_bonus/cub3d_bonus.c \
-		game_bonus/init_text_len.c \
+		game_bonus/init_text_len_bonus.c \
 		game_bonus/print_textures_bonus.c \
 		player_bonus/hook_bonus.c \
 		player_bonus/move_player_bonus.c \

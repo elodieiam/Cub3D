@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 14:54:22 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 09:30:38 by niromano         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:37:35 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	background(t_mlx *mlx, t_data *data)
 	while (x != SCREEN_X)
 	{
 		y = 0;
-		while (y != SCREEN_Y)
+		while (y != SCREEN_Y - 1)
 		{
 			if (y < SCREEN_Y / 2)
 				my_mlx_pixel_put(&mlx->img_buf, x, y, data->textures.color_c);

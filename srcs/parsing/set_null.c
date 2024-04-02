@@ -6,7 +6,7 @@
 /*   By: niromano <niromano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 06:46:23 by niromano          #+#    #+#             */
-/*   Updated: 2024/01/30 13:49:28 by niromano         ###   ########.fr       */
+/*   Updated: 2024/04/02 10:40:55 by niromano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	set_mlx_null(t_mlx *mlx)
 	mlx->mlx_ptr = NULL;
 	mlx->win = NULL;
 	mlx->img_buf.img = NULL;
+	mlx->img_map.img = NULL;
 }
 
 void	set_data_null(t_data *data)
@@ -28,10 +29,10 @@ void	set_data_null(t_data *data)
 	data->textures.raw_e = NULL;
 	data->textures.color_f = -1;
 	data->textures.color_c = -1;
-	data->textures.texture_n = NULL;
-	data->textures.texture_s = NULL;
-	data->textures.texture_w = NULL;
-	data->textures.texture_e = NULL;
+	data->textures.texture_n.img = NULL;
+	data->textures.texture_s.img = NULL;
+	data->textures.texture_w.img = NULL;
+	data->textures.texture_e.img = NULL;
 	data->map = NULL;
 	data->buffer = NULL;
 }
